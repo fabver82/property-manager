@@ -25,6 +25,7 @@ class PropertyType extends AbstractType
             ->add('description',TextareaType::class,[
                 'required' => true,
                 'trim' => true,
+                'attr' => ['class' => 'tinymce'],
                 ])
             ->add('bedrooms')
             ->add('min_price',MoneyType::class,[
