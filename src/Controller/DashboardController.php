@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class DashboardController extends AbstractController
 {
     #[Route('/admin', name: 'app_dashboard')]
@@ -16,14 +17,4 @@ class DashboardController extends AbstractController
             'page' => 'Dashboard',
         ]);
     }
-
-    #[Route('/admin/property/new', name: 'app_new_property')]
-    public function newProperty(): Response
-    {
-        return $this->render('back/property/new_property.html.twig', [
-            'category' => 'Property',
-            'page' => 'Create New Property',
-        ]);
-    }
-
 }
