@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{% block title %}{{ page }}{% endblock %}</title>
+    <link rel="icon" href="{{ asset('img/favicon.ico')}}">
+    {% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
+    <link href="{{  asset('back/css/themes/lite-purple.min.css') }}" rel="stylesheet" />
+    <link href="{{  asset('back/css/plugins/perfect-scrollbar.min.css')}}" rel="stylesheet" />
+    {% endblock %}
+</head>
+
+<body class="text-left">
+{#class dark-theme available #}
+<div class="app-admin-wrap layout-sidebar-large">
+    {% include 'back/includes/topbar.html.twig' %}
+    {% include 'back/includes/sidebar.html.twig' %}
+
+
+    <!-- =============== Left side End ================-->
+    <div class="main-content-wrap sidenav-open d-flex flex-column">
+        <!-- ============ Body content start ============= -->
+
+        <div class="main-content">
+            {% include 'back/includes/breadcrumb.html.twig' %}
+            <div class="separator-breadcrumb border-top"></div>
+            {% block body %}
+            {% endblock %}
+            <!-- end of main-content -->
+        </div>
+        <!-- Footer Start -->
+        <div class="flex-grow-1"></div>
+        {% include 'back/includes/footer.html.twig' %}
+        <!-- footer end -->
+    </div>
+</div>
+{% include 'back/includes/search-results.html.twig'%}
+
+{% block javascripts %}
+<script src="{{ asset('back/js/plugins/jquery-3.3.1.min.js')}}"></script>
+<script src="{{ asset('back/js/plugins/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('back/js/plugins/perfect-scrollbar.min.js')}}"></script>
+<script src="{{ asset('back/js/scripts/script.min.js')}}"></script>
+<script src="{{ asset('back/js/scripts/sidebar.large.script.min.js')}}"></script>
+{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+{% extends 'back/base.html.twig'%}
+{% block stylesheets%}
+{{ parent()}}
+<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
+{% endblock %}
+{% block body%}
+{#    TODO: edit action#}
+<form method="post" action="#">
+    <div class="row">
+        <div class="col-md-3 form-group mb-3">
+            <label for="type">Type: </label>
+            <select class="form-control form-control-rounded" name="type" required>
+                <option value="condo">Condo</option>
+                <option value="villa">Villa</option>
+            </select>
+        </div>
+        <div class="col-md-3 form-group mb-3">
+            <label for="bedrooms">Bedrooms: </label>
+            <input class="form-control form-control-rounded" type="number" min="0" name="bedrooms" placeholder="number of bedrooms" required/>
+        </div>
+        <div class="col-md-12 form-group mb-3">
+            <label for="title">Title: </label>
+            <input class="form-control form-control-rounded" type="text" min="6" max="200" name="title" placeholder="Title for your property" required/>
+        </div>
+
+        <div class="col-md-12 form-group mb-3">
+            <label for="description"> Description: </label>
+            <div>
+                <!-- Create the toolbar container -->
+{#                TODO: check quilljs for more option on bar#}
+                <div id="toolbar" class="form-control">
+                    <button class="ql-bold">Bold</button>
+                    <button class="ql-italic">Italic</button>
+                </div>
+
+                <!-- Create the editor container -->
+                <div id="description" class="form-control">
+                    <p>Write here a beautiful description about your property</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 form-group mb-3">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+
+    </div>
+
+</form>
+{%endblock%}
+{% block javascripts %}
+{{ parent() }}
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+    var editor = new Quill('#description', {
+        modules: { toolbar: '#toolbar' },
+        theme: 'snow',
+    });
+</script>
+{% endblock %}
