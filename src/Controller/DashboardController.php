@@ -17,4 +17,13 @@ class DashboardController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/property/new', name: 'app_new_property')]
+    public function newProperty(): Response
+    {
+        return $this->render('back/property/new_property.html.twig', [
+            'category' => 'Property',
+            'page' => 'Create New Property',
+        ]);
+    }
+
 }
