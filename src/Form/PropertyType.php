@@ -7,9 +7,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use App\Config\PropertyEnumType;
-use App\Config\PropertyEnumSpaces;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
+//use App\Config\PropertyEnumType;
+//use App\Config\PropertyEnumSpaces;
+//use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -33,14 +34,26 @@ class PropertyType extends AbstractType
                 'html5' => true,
                 'label' => 'Minimum Price',
             ])
-            ->add('type',EnumType::class,[
-                'class' => PropertyEnumType::class
+            ->add('type',ChoiceType::class,[
+                'choices' => [
+                    'Condo' => 'Condo',
+                    'Villa' => 'Villa',
+                    'Bungalow' => 'Bungalow',
+                ]
             ])
-            ->add('pool',EnumType::class,[
-                'class' => PropertyEnumSpaces::class
+            ->add('pool',ChoiceType::class,[
+                'choices' => [
+                    'None' => null,
+                    'Private' => 'Private',
+                    'Shared' => 'Shared',
+                ]
             ])
-            ->add('gym',EnumType::class,[
-                'class' => PropertyEnumSpaces::class
+            ->add('gym',ChoiceType::class,[
+                'choices' => [
+                    'None' => null,
+                    'Private' => 'Private',
+                    'Shared' => 'Shared',
+                ]
             ])
             ;
     }

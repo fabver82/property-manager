@@ -33,8 +33,9 @@ class PropertyController extends AbstractController
         $property = new Property();
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
-
+        dump($property);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $propertyRepository->add($property, true);
 
             return $this->redirectToRoute('app_property_index', [], Response::HTTP_SEE_OTHER);

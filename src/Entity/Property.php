@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Config\PropertyEnumType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -94,6 +95,7 @@ class Property
 
     public function setType(string $type): self
     {
+
         $this->type = $type;
 
         return $this;
