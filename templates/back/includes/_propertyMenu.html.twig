@@ -1,6 +1,6 @@
 {% for property in properties %}
 <li class="nav-item">
-    <a href="{{path('app_property_show',{id:property.id})}}">
+    <a href="{{path('app_property_show',{'id':property.id})}}">
         <i class="nav-icon i-Green-House"></i><span class="item-name">{{property.title}}</span>
     </a>
 </li>
