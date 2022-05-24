@@ -14,7 +14,7 @@ class Picture
     private $id;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private $type;
+    private $type = 'property';
 
     #[ORM\Column(type: 'string', length: 255)]
     private $filename;

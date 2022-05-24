@@ -37,7 +37,7 @@ class Property
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private $gym;
 
-    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Picture::class)]
+    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Picture::class,cascade: ['persist'])]
     private $pictures;
 
     public function __construct()

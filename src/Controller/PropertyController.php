@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Entity\Picture;
 use App\Form\PropertyType;
+use App\Form\PropertyPictureUploadType;
 use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +19,7 @@ class PropertyController extends AbstractController
     private $category = 'Property';
 
 
-//    #[Route('/', name: 'propertyMenu')]
+//    this function is used to render the menu with the list of existing properties
     public function propertyMenu(PropertyRepository $propertyRepository): Response
     {
 
@@ -42,7 +44,7 @@ class PropertyController extends AbstractController
         $property = new Property();
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
-        dump($property);
+//        dump($property);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $propertyRepository->add($property, true);
@@ -82,6 +84,40 @@ class PropertyController extends AbstractController
 
         return $this->renderForm('back/property/edit.html.twig', [
             'page' => 'Edit',
+            'category' => $this->category,
+            'property' => $property,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/{id}/pictures', name: 'app_property_pictures', methods: ['GET','POST'])]
+    public function uploadPicture(Request $request, Property $property, PropertyRepository $propertyRepository): Response
+    {
+//        $picture = new Picture();
+        $form = $this->createForm(PropertyPictureUploadType::class);
+        $form->handleRequest($request);
+//
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pictures=$form->get('pictures')->getData();
+            foreach ($pictures as $picture){
+                $file = md5(uniqid()).'.'.$picture->guessExtension();
+                $picture->move(
+                    $this->getParameter('pictures_directory'),
+                    $file
+                );
+                $propPic = new Picture();
+                $propPic->setFilename($file);
+                $propPic->setProperty($property);
+                $property->addPicture($propPic);
+            }
+            dump($property);
+            $propertyRepository->add($property, true);
+//
+//
+//            return $this->redirectToRoute('app_property_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('back/property/upload.html.twig', [
+            'page' => 'Upload',
             'category' => $this->category,
             'property' => $property,
             'form' => $form,
