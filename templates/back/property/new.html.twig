@@ -1,11 +1,26 @@
 {% extends 'back/base.html.twig' %}
 
 {% block title %}New Property{% endblock %}
-
+{% block stylesheets%}
+    {{ parent()}}
+    <link href="{{ asset('back/js/plugins/tinymce/skins/ui/tinymce-5/skin.min.css')}}" rel="stylesheet" />
+{% endblock %}
 {% block body %}
     <h1>Create new Property</h1>
 
     {{ include('back/property/_form.html.twig') }}
 
     <a href="{{ path('app_property_index') }}">back to list</a>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Include the Quill library -->
+    <script src="{{ asset('back/js/plugins/tinymce/tinymce.min.js')}}"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+        tinymce.init({
+            selector: '.tinymce'
+        });
+    </script>
 {% endblock %}
