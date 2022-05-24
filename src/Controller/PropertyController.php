@@ -17,6 +17,15 @@ class PropertyController extends AbstractController
     private $category = 'Property';
 
 
+//    #[Route('/', name: 'propertyMenu')]
+    public function propertyMenu(PropertyRepository $propertyRepository): Response
+    {
+
+        return $this->render('back/includes/_propertyMenu.html.twig', [
+            'properties' => $propertyRepository->findAll(),
+        ]);
+    }
+
     #[Route('/', name: 'app_property_index', methods: ['GET'])]
     public function index(PropertyRepository $propertyRepository): Response
     {
