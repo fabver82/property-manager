@@ -12,12 +12,12 @@ use App\Config\PropertyEnumSpaces;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PropertyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+//        TODO: add quill or tinymce
         $builder
             ->add('title',TextType::class,[
                 'trim' => true,
@@ -29,7 +29,7 @@ class PropertyType extends AbstractType
                 ])
             ->add('bedrooms')
             ->add('min_price',MoneyType::class,[
-                'currency' => 'THB',
+                'currency' => '',
                 'html5' => true,
                 'label' => 'Minimum Price',
             ])
@@ -42,7 +42,6 @@ class PropertyType extends AbstractType
             ->add('gym',EnumType::class,[
                 'class' => PropertyEnumSpaces::class
             ])
-            ->add('save', SubmitType::class)
             ;
     }
 

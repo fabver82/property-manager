@@ -1,0 +1,50 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Property{% endblock %}
+
+{% block body %}
+    <h1>Property</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ property.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ property.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ property.description }}</td>
+            </tr>
+            <tr>
+                <th>Bedrooms</th>
+                <td>{{ property.bedrooms }}</td>
+            </tr>
+            <tr>
+                <th>Min_price</th>
+                <td>{{ property.minPrice }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ property.type }}</td>
+            </tr>
+            <tr>
+                <th>Pool</th>
+                <td>{{ property.pool }}</td>
+            </tr>
+            <tr>
+                <th>Gym</th>
+                <td>{{ property.gym }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_property_index') }}">back to list</a>
+
+    <a href="{{ path('app_property_edit', {'id': property.id}) }}">edit</a>
+
+    {{ include('back/property/_delete_form.html.twig') }}
+{% endblock %}
