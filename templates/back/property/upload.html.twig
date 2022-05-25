@@ -1,31 +1,61 @@
 {% extends 'back/base.html.twig' %}
 
 {% block title %}Upload{% endblock %}
-{% block stylesheets%}
-    {{ parent()}}
-    <link href="{{ asset('back/css/plugins/dropzone.min.css')}}" rel="stylesheet" />
-{% endblock %}
+
 {% block body %}
-    <h1>Property Pictures</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn" type="submit">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
-{#    <div class="col-md-12 mb-4">#}
-{#        <div class="card text-left">#}
-{#            <div class="card-body">#}
-{#                <h4 class="card-title">multple upload</h4>#}
-{#                <form class="dropzone" enctype="multipart/form-data" id="multple-file-upload" action="#">#}
-{#                    <div class="fallback">#}
-{#                        <input name="file" type="file" multiple="multiple" />#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    <div class="card">
+        <div class="card-body">
+            <div class="ul-widget__head v-margin pb-20">
+                <div class="ul-widget__head-label">
+                    <h3 class="ul-widget__head-title">{{ property.title }}</h3>
+                </div>
+                <button class="btn bg-white _r_btn border-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="_dot _inline-dot bg-primary"></span><span class="_dot _inline-dot bg-primary"></span><span class="_dot _inline-dot bg-primary"></span></button>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(499px, 52px, 0px);">
+                    <a class="dropdown-item" href="{{ path('app_property_edit', {'id': property.id}) }}">Edit</a>
+                    <a class="dropdown-item" href="{{ path('app_property_show', {'id': property.id}) }}">Infos</a>
+                    <div class="dropdown-divider"></div>
+                    {{ include('back/property/_delete_form.html.twig') }}
+                </div>
+            </div>
+            <div class="ul-widget__body">
+                {{ include('back/property/_formUploadPics.html.twig') }}
+                {% for picture in property.pictures %}
+                    <div>
+                        <img src="{{ asset('/uploads/' ~ picture.filename) }}" alt="image" width="150">
+                        <a href="{{ path('app_picture_delete',{id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Delete</a>
+                    </div>
+                {%  endfor %}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 {% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('back/js/plugins/dropzone.min.js')}}"></script>
-    <script src="{{ asset('back/js/scripts/dropzone.script.min.js')}}"></script>
+    <script>
+        window.onload = () =>{
+            let links = document.querySelectorAll("[data-delete]")
+            for(link of links){
+                link.addEventListener('click',function(e){
+                    e.preventDefault()
+                    if(confirm('Delete this image ?')){
+                        fetch(this.getAttribute('href'),{
+                            method: "DELETE",
+                            headers: {
+                                "X-Requested-With": "XMLHttpRequest",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({"_token":this.dataset.token})
+                        }).then(
+                            response => response.json()
+                        ).then(data=>{
+                            if(data.success)
+                                this.parentElement.remove()
+                            else
+                                alert(data.error)
+                        }).catch(e => alert(e))
+                    }
+                })
+            }
+        }
+    </script>
 {% endblock %}

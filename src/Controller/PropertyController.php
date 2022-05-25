@@ -7,7 +7,9 @@ use App\Entity\Picture;
 use App\Form\PropertyType;
 use App\Form\PropertyPictureUploadType;
 use App\Repository\PropertyRepository;
+use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -92,10 +94,9 @@ class PropertyController extends AbstractController
     #[Route('/{id}/pictures', name: 'app_property_pictures', methods: ['GET','POST'])]
     public function uploadPicture(Request $request, Property $property, PropertyRepository $propertyRepository): Response
     {
-//        $picture = new Picture();
         $form = $this->createForm(PropertyPictureUploadType::class);
         $form->handleRequest($request);
-//
+
         if ($form->isSubmitted() && $form->isValid()) {
             $pictures=$form->get('pictures')->getData();
             foreach ($pictures as $picture){
@@ -109,7 +110,7 @@ class PropertyController extends AbstractController
                 $propPic->setProperty($property);
                 $property->addPicture($propPic);
             }
-            dump($property);
+//            dump($property);
             $propertyRepository->add($property, true);
 //
 //
@@ -122,6 +123,20 @@ class PropertyController extends AbstractController
             'property' => $property,
             'form' => $form,
         ]);
+    }
+    #[Route('/delete/picture/{id}', name: 'app_picture_delete', methods: ['DELETE'])]
+    public function deletePicture(Picture $picture, PictureRepository $pictureRepo, Request $request):JsonResponse
+    {
+        $data = json_decode($request->getContent(),true);
+        if($this->isCsrfTokenValid('delete'.$picture->getId(),$data['_token'])){
+            unlink($this->getParameter('pictures_directory').'/'.$picture->getFilename());
+            $property = $picture->getProperty();
+            $property->removePicture($picture);
+            $pictureRepo->remove($picture,true);
+           return new JsonResponse(['success' => 1]);
+        }else{
+           return new JsonResponse(['error' => 'Invalid Token'],400);
+        }
     }
 
     #[Route('/{id}', name: 'app_property_delete', methods: ['POST'])]
