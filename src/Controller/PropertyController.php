@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Property;
 use App\Entity\Picture;
+use App\Form\PropertySectionType;
 use App\Form\PropertyType;
 use App\Form\PropertyPictureUploadType;
 use App\Repository\PropertyRepository;
@@ -91,6 +92,26 @@ class PropertyController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[Route('/{id}/picture/edit', name: 'app_section_edit', methods: ['GET', 'POST'])]
+    public function createSection(Request $request, Picture $picture, PictureRepository $pictureRepository): Response
+    {
+        $form = $this->createForm(PropertySectionType::class, $picture);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pictureRepository->add($picture, true);
+
+            return $this->redirectToRoute('app_property_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('back/property/edit.html.twig', [
+            'page' => 'Edit',
+            'category' => $this->category,
+            'property' => $picture->getProperty(),
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{id}/pictures', name: 'app_property_pictures', methods: ['GET','POST'])]
     public function uploadPicture(Request $request, Property $property, PropertyRepository $propertyRepository): Response
     {

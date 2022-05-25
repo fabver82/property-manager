@@ -20,7 +20,7 @@ class Picture
     private $filename;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $caption;
+    private $room;
 
     #[ORM\ManyToOne(targetEntity: Property::class, inversedBy: 'pictures')]
     private $property;
@@ -57,14 +57,14 @@ class Picture
         return $this;
     }
 
-    public function getCaption(): ?string
+    public function getRoom(): ?string
     {
-        return $this->caption;
+        return $this->room;
     }
 
-    public function setCaption(?string $caption): self
+    public function setRoom(?string $room): self
     {
-        $this->caption = $caption;
+        $this->room = $room;
 
         return $this;
     }
