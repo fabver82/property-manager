@@ -25,6 +25,9 @@ class Picture
     #[ORM\ManyToOne(targetEntity: Property::class, inversedBy: 'pictures')]
     private $property;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $description;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Picture
     public function setProperty(?Property $property): self
     {
         $this->property = $property;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

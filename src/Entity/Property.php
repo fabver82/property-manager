@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Config\PropertyEnumType;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\PropertyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,12 +17,31 @@ class Property
     private $id;
 
     #[ORM\Column(type: 'string', length: 200)]
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 20,
+     *      max = 200,
+     *      minMessage = "Your title must be at least {{ limit }} characters long",
+     *      maxMessage = "Your title cannot be longer than {{ limit }} characters"
+     * )
+     */
     private $title;
 
     #[ORM\Column(type: 'text')]
+    /**
+     * @Assert\NotBlank
+     */
     private $description;
 
     #[ORM\Column(type: 'integer')]
+    /**
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\Positive
+     */
     private $bedrooms;
 
     #[ORM\Column(type: 'float')]
