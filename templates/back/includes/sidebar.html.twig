@@ -55,9 +55,9 @@
         </ul>
         <ul class="childNav" data-parent="pages">
             <li class="nav-item bg-success"><a href="{{path('app_page_new')}}"><i class="nav-icon i-Add"></i><span class="item-name">Add New Page</span></a></li>
-{#            {{ render(controller(#}
-{#                'App\\Controller\\PropertyController::propertyMenu'#}
-{#            )) }}#}
+            {{ render(controller(
+                'App\\Controller\\PageController::pageMenu'
+            )) }}
 
         </ul>
 {#        <ul class="childNav" data-parent="forms">#}

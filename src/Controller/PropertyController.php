@@ -35,8 +35,8 @@ class PropertyController extends AbstractController
     public function index(PropertyRepository $propertyRepository): Response
     {
         return $this->render('back/property/index.html.twig', [
-            'page' => 'List',
-            'category' => $this->category,
+            'pageBC' => 'List',
+            'categoryBC' => $this->category,
             'properties' => $propertyRepository->findAll(),
         ]);
     }
@@ -56,8 +56,8 @@ class PropertyController extends AbstractController
         }
 
         return $this->renderForm('back/property/new.html.twig', [
-            'page' => 'New',
-            'category' => $this->category,
+            'pageBC' => 'New',
+            'categoryBC' => $this->category,
             'property' => $property,
             'form' => $form,
         ]);
@@ -67,8 +67,8 @@ class PropertyController extends AbstractController
     public function show(Property $property): Response
     {
         return $this->render('back/property/show.html.twig', [
-            'page' => 'Details',
-            'category' => $this->category,
+            'pageBC' => 'Details',
+            'categoryBC' => $this->category,
             'property' => $property,
         ]);
     }
@@ -86,8 +86,8 @@ class PropertyController extends AbstractController
         }
 
         return $this->renderForm('back/property/edit.html.twig', [
-            'page' => 'Edit',
-            'category' => $this->category,
+            'pageBC' => 'Edit',
+            'categoryBC' => $this->category,
             'property' => $property,
             'form' => $form,
         ]);
@@ -105,8 +105,8 @@ class PropertyController extends AbstractController
         }
 
         return $this->renderForm('back/property/edit.html.twig', [
-            'page' => 'Edit',
-            'category' => $this->category,
+            'pageBC' => 'Edit',
+            'categoryBC' => $this->category,
             'property' => $picture->getProperty(),
             'form' => $form,
         ]);
@@ -139,8 +139,8 @@ class PropertyController extends AbstractController
         }
 
         return $this->renderForm('back/property/upload.html.twig', [
-            'page' => 'Upload',
-            'category' => $this->category,
+            'pageBC' => 'Upload',
+            'categoryBC' => $this->category,
             'property' => $property,
             'form' => $form,
         ]);

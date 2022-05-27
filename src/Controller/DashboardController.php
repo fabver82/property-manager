@@ -13,8 +13,8 @@ class DashboardController extends AbstractController
     public function index(): Response
     {
         return $this->render('back/dashboard.html.twig', [
-            'category' => 'Admin',
-            'page' => 'Dashboard',
+            'categoryBC' => 'Admin',
+            'pageBC' => 'Dashboard',
         ]);
     }
 }

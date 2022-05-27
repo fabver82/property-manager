@@ -1,0 +1,28 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Edit Page{% endblock %}
+{% block stylesheets%}
+    {{ parent()}}
+    <link href="{{ asset('back/js/plugins/tinymce/skins/ui/tinymce-5/skin.min.css')}}" rel="stylesheet" />
+{% endblock %}
+{% block body %}
+    <h1>Edit Page</h1>
+
+    {{ include('back/page/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_page_index') }}">back to list</a>
+
+    {{ include('back/page/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Include the Quill library -->
+    <script src="{{ asset('back/js/plugins/tinymce/tinymce.min.js')}}"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+        tinymce.init({
+            selector: '.tinymce'
+        });
+    </script>
+{% endblock %}

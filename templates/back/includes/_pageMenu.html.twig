@@ -1,0 +1,7 @@
+{% for page in pages %}
+<li class="nav-item">
+    <a href="{{path('app_page_show',{'id':page.id})}}">
+        <i class="nav-icon i-Green-House"></i><span class="item-name">{{page.title}}</span>
+    </a>
+</li>
+{% endfor %}

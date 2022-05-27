@@ -28,7 +28,9 @@ class Page
     {
         $this->pictures = new ArrayCollection();
     }
-
+    public function __toString() {
+        return '';
+    }
     public function getId(): ?int
     {
         return $this->id;
