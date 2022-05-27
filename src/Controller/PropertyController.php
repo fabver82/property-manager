@@ -6,7 +6,7 @@ use App\Entity\Property;
 use App\Entity\Picture;
 use App\Form\PropertySectionType;
 use App\Form\PropertyType;
-use App\Form\PropertyPictureUploadType;
+use App\Form\PictureUploadType;
 use App\Repository\PropertyRepository;
 use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -115,7 +115,7 @@ class PropertyController extends AbstractController
     #[Route('/{id}/pictures', name: 'app_property_pictures', methods: ['GET','POST'])]
     public function uploadPicture(Request $request, Property $property, PropertyRepository $propertyRepository): Response
     {
-        $form = $this->createForm(PropertyPictureUploadType::class);
+        $form = $this->createForm(PictureUploadType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

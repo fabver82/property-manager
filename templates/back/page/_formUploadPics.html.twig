@@ -1,0 +1,13 @@
+<div class="card-header purple-500 text-purple-500 p-1">
+    <div class="d-flex align-items-center mb-4">
+        <div class="card-title text-white mb-0">Add Pictures</div>
+    </div>
+    {{ form_start(form) }}
+    <div class="input-group input-group-lg p-2">
+        {{ form_widget(form) }}
+    </div>
+    <div>
+        <button class="btn" type="submit">{{ button_label|default('Save') }}</button>
+    </div>
+    {{ form_end(form) }}
+</div>

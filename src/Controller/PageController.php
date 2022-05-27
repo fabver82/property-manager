@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Entity\Picture;
 use App\Form\PageType;
+use App\Form\PictureUploadType;
 use App\Repository\PageRepository;
+use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -89,7 +92,7 @@ class PageController extends AbstractController
     #[Route('/{id}/pictures', name: 'app_page_pictures', methods: ['GET','POST'])]
     public function uploadPicture(Request $request, Page $page, PageRepository $pageRepository): Response
     {
-        $form = $this->createForm(PropertyPictureUploadType::class);
+        $form = $this->createForm(PictureUploadType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -108,6 +111,26 @@ class PageController extends AbstractController
             }
             $pageRepository->add($page, true);
 //            return $this->redirectToRoute('app_property_index', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->renderForm('back/page/upload.html.twig', [
+            'pageBC' => 'Upload',
+            'categoryBC' => $this->category,
+            'page' => $page,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/delete/picture/{id}', name: 'app_page_picture_delete', methods: ['DELETE'])]
+    public function deletePicture(Picture $picture, PictureRepository $pictureRepo, Request $request):JsonResponse
+    {
+        $data = json_decode($request->getContent(),true);
+        if($this->isCsrfTokenValid('delete'.$picture->getId(),$data['_token'])){
+            unlink($this->getParameter('pictures_directory').'/'.$picture->getFilename());
+            $page = $picture->getPage();
+            $page->removePicture($picture);
+            $pictureRepo->remove($picture,true);
+            return new JsonResponse(['success' => 1]);
+        }else{
+            return new JsonResponse(['error' => 'Invalid Token'],400);
         }
     }
     #[Route('/{id}', name: 'app_page_delete', methods: ['POST'])]

@@ -21,7 +21,7 @@ class Page
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\OneToMany(mappedBy: 'page', targetEntity: Picture::class)]
+    #[ORM\OneToMany(mappedBy: 'page', targetEntity: Picture::class,cascade: ['persist'])]
     private $pictures;
 
     public function __construct()

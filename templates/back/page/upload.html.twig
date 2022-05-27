@@ -1,6 +1,6 @@
 {% extends 'back/base.html.twig' %}
 
-{% block title %}page{% endblock %}
+{% block title %}Upload{% endblock %}
 
 {% block body %}
     <div class="card">
@@ -12,39 +12,20 @@
                 <button class="btn bg-white _r_btn border-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="_dot _inline-dot bg-primary"></span><span class="_dot _inline-dot bg-primary"></span><span class="_dot _inline-dot bg-primary"></span></button>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(499px, 52px, 0px);">
                     <a class="dropdown-item" href="{{ path('app_page_edit', {'id': page.id}) }}">Edit</a>
-                    <a class="dropdown-item" href="{{ path('app_page_pictures', {'id': page.id}) }}">Pictures</a>
-                    {#                    <a class="dropdown-item" href="{{ path('app_page_section', {'id': page.id}) }}">Add Section</a>#}
+                    <a class="dropdown-item" href="{{ path('app_page_show', {'id': page.id}) }}">Infos</a>
                     <div class="dropdown-divider"></div>
                     {{ include('back/page/_delete_form.html.twig') }}
                 </div>
             </div>
             <div class="ul-widget__body">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <td>{{ page.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Title</th>
-                        <td>{{ page.title }}</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ page.description }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="ul-widget__body">
-                <div class="row">
+                {{ include('back/page/_formUploadPics.html.twig') }}
+                <div class="row m-2">
                     {% if page.pictures|length > 0 %}
                         {% for picture in page.pictures %}
                             {{ include('back/page/_pictureCard.html.twig') }}
                         {%  endfor %}
                     {% else %}
-                        <div class="alert alert-danger" role="alert"><strong class="text-capitalize">No Pictures!</strong> you don't have any pictures.<br/>
-                            click <a href="{{ path('app_page_pictures', {'id': page.id}) }}">here</a> to add some pictures
+                        <div class="alert alert-danger" role="alert"><strong class="text-capitalize">No Pictures!</strong> you don't have any pictures.
                             <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                         </div>
                     {% endif %}
@@ -52,6 +33,7 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

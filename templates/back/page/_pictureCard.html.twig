@@ -1,0 +1,7 @@
+<div class="col-md-3">
+    <div class="card mb-4 o-hidden"><img class="card-img-top" src="{{ asset('/uploads/' ~ picture.filename) }}" alt="page picture">
+        <div class="card-body">
+            <a href="{{ path('app_page_picture_delete',{id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Delete</a>
+        </div>
+    </div>
+</div>
