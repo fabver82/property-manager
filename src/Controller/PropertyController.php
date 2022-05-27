@@ -101,7 +101,7 @@ class PropertyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $pictureRepository->add($picture, true);
 
-            return $this->redirectToRoute('app_property_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_property_pictures', ['id'=>$picture->getProperty()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/property/edit.html.twig', [

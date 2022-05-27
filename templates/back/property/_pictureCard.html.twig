@@ -1,0 +1,21 @@
+<div class="col-md-3">
+    <div class="card mb-4 o-hidden"><img class="card-img-top" src="{{ asset('/uploads/' ~ picture.filename) }}" alt="property picture">
+        <div class="card-body">
+            {% if picture.room  is not null %}
+            <h5 class="card-title">{{ picture.room }}</h5>
+            {% endif %}
+            {% if picture.description  is not null %}
+            <p class="card-text">{{ picture.description }}</p>
+            {% endif %}
+        </div>
+{#        <ul class="list-group list-group-flush">#}
+{#            <li class="list-group-item">Cras justo odio</li>#}
+{#            <li class="list-group-item">Dapibus ac facilisis in</li>#}
+{#            <li class="list-group-item">Vestibulum at eros</li>#}
+{#        </ul>#}
+        <div class="card-body">
+            <a class="card-link" href="{{ path('app_section_edit',{id: picture.id}) }}">Edit Details</a>
+            <a href="{{ path('app_picture_delete',{id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Delete</a>
+        </div>
+    </div>
+</div>

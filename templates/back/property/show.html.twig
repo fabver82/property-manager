@@ -57,29 +57,16 @@
                 </table>
             </div>
             <div class="ul-widget__body">
-                <div>
+                <div class="row">
                     {% if property.pictures|length > 0 %}
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Picture</th>
-                                <th>actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
                             {% for picture in property.pictures %}
-                                <tr>
-                                    <td><img src="{{ asset('/uploads/' ~ picture.filename) }}" alt="image" width="150"></td>
-                                    <td>
-                                        <a href="{{ path('app_picture_delete',{id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Delete</a>
-                                        <a href="{{ path('app_section_edit',{id: picture.id}) }}">Create Section</a>
-                                    </td>
-                                </tr>
+                                {% if picture.room is not null %}
+                                    {{ include('back/property/_pictureCard.html.twig') }}
+                                {% endif %}
                             {%  endfor %}
-                            </tbody>
-                        </table>
                     {% else %}
-                        <div class="alert alert-danger" role="alert"><strong class="text-capitalize">No Pictures!</strong> you don't have any pictures.
+                        <div class="alert alert-danger" role="alert"><strong class="text-capitalize">No Pictures!</strong> you don't have any pictures.<br/>
+                            click <a href="{{ path('app_property_pictures', {'id': property.id}) }}">here</a> to add some pictures
                             <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                         </div>
                     {% endif %}
