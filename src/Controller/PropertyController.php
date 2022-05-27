@@ -7,6 +7,7 @@ use App\Entity\Picture;
 use App\Form\PropertySectionType;
 use App\Form\PropertyType;
 use App\Form\PictureUploadType;
+use App\Repository\BookingRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -72,7 +73,16 @@ class PropertyController extends AbstractController
             'property' => $property,
         ]);
     }
-
+    #[Route('/{id}/bookings', name: 'app_property_bookings', methods: ['GET'])]
+    public function bookingList(Property $property): Response
+    {
+        return $this->render('back/booking/index.html.twig', [
+            'bookings' => $property->getBookings(),
+            'pageBC' => 'Bookings',
+            'categoryBC' => $this->category,
+            'property' => $property,
+        ]);
+    }
     #[Route('/{id}/edit', name: 'app_property_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Property $property, PropertyRepository $propertyRepository): Response
     {

@@ -42,7 +42,7 @@ class BookingRepository extends ServiceEntityRepository
 //    /**
 //     * @return Booking[] Returns an array of Booking objects
 //     */
-//    public function findByExampleField($value): array
+//    public function findByProperty($property): array
 //    {
 //        return $this->createQueryBuilder('b')
 //            ->andWhere('b.exampleField = :val')

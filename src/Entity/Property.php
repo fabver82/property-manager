@@ -67,7 +67,10 @@ class Property
         $this->pictures = new ArrayCollection();
         $this->bookings = new ArrayCollection();
     }
-
+    public function __toString()
+    {
+        return $this->title;
+    }
     public function getId(): ?int
     {
         return $this->id;
