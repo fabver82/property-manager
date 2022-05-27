@@ -7,6 +7,9 @@
             <li class="nav-item" data-item="properties"><a class="nav-item-hold" href="{{path('app_property_index')}}"><i class="nav-icon i-Building"></i><span class="nav-text">Properties</span></a>
                 <div class="triangle"></div>
             </li>
+            <li class="nav-item" data-item="pages"><a class="nav-item-hold" href="{{path('app_page_index')}}"><i class="nav-icon i-Info-Window"></i><span class="nav-text">Pages</span></a>
+                <div class="triangle"></div>
+            </li>
 {#            <li class="nav-item" data-item="extrakits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Suitcase"></i><span class="nav-text">Extra kits</span></a>#}
 {#                <div class="triangle"></div>#}
 {#            </li>#}
@@ -49,6 +52,13 @@
             )) }}
 
             {#            <li class="nav-item"><a href="#"><i class="nav-icon i-Data"></i><span class="item-name">List</span></a></li>#}
+        </ul>
+        <ul class="childNav" data-parent="pages">
+            <li class="nav-item bg-success"><a href="{{path('app_page_new')}}"><i class="nav-icon i-Add"></i><span class="item-name">Add New Page</span></a></li>
+{#            {{ render(controller(#}
+{#                'App\\Controller\\PropertyController::propertyMenu'#}
+{#            )) }}#}
+
         </ul>
 {#        <ul class="childNav" data-parent="forms">#}
 {#            <li class="nav-item"><a href="form.basic.html"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">Basic Elements</span></a></li>#}

@@ -28,6 +28,9 @@ class Picture
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $description;
 
+    #[ORM\ManyToOne(targetEntity: Page::class, inversedBy: 'pictures')]
+    private $page;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Picture
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPage(): ?Page
+    {
+        return $this->page;
+    }
+
+    public function setPage(?Page $page): self
+    {
+        $this->page = $page;
 
         return $this;
     }
