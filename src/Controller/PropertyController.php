@@ -83,6 +83,16 @@ class PropertyController extends AbstractController
             'property' => $property,
         ]);
     }
+    #[Route('/{id}/prices', name: 'app_property_prices', methods: ['GET'])]
+    public function priceList(Property $property): Response
+    {
+        return $this->render('back/price/index.html.twig', [
+            'prices' => $property->getPrices(),
+            'pageBC' => 'Prices',
+            'categoryBC' => $this->category,
+            'property' => $property,
+        ]);
+    }
     #[Route('/{id}/edit', name: 'app_property_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Property $property, PropertyRepository $propertyRepository): Response
     {

@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Booking</h1>
 
-    {{ include('booking/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('back/booking/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_booking_index') }}">back to list</a>
 
-    {{ include('booking/_delete_form.html.twig') }}
+    {{ include('back/booking/_delete_form.html.twig') }}
 {% endblock %}
