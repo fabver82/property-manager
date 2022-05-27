@@ -62,10 +62,14 @@ class Property
     #[ORM\OneToMany(mappedBy: 'property', targetEntity: Booking::class)]
     private $bookings;
 
+    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Price::class)]
+    private $prices;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->prices = new ArrayCollection();
     }
     public function __toString()
     {
@@ -215,6 +219,36 @@ class Property
             // set the owning side to null (unless already changed)
             if ($booking->getProperty() === $this) {
                 $booking->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Price>
+     */
+    public function getPrices(): Collection
+    {
+        return $this->prices;
+    }
+
+    public function addPrice(Price $price): self
+    {
+        if (!$this->prices->contains($price)) {
+            $this->prices[] = $price;
+            $price->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrice(Price $price): self
+    {
+        if ($this->prices->removeElement($price)) {
+            // set the owning side to null (unless already changed)
+            if ($price->getProperty() === $this) {
+                $price->setProperty(null);
             }
         }
 
