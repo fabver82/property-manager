@@ -13,6 +13,7 @@
                 <th>Start_date</th>
                 <th>End_date</th>
                 <th>Price</th>
+                <th>Property</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>{{ price.startDate ? price.startDate|date('Y-m-d') : '' }}</td>
                 <td>{{ price.endDate ? price.endDate|date('Y-m-d') : '' }}</td>
                 <td>{{ price.price }}</td>
+                <td>{{ price.property }}</td>
                 <td>
                     <a href="{{ path('app_price_show', {'id': price.id}) }}">show</a>
                     <a href="{{ path('app_price_edit', {'id': price.id}) }}">edit</a>
@@ -37,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_price_new') }}">Create new</a>
+    <a href="{{ path('app_property_prices_new', {'id': property.id}) }}">Create new</a>
 {% endblock %}

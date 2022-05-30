@@ -20,7 +20,7 @@ class Property
     /**
      * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 20,
+     *      min = 5,
      *      max = 200,
      *      minMessage = "Your title must be at least {{ limit }} characters long",
      *      maxMessage = "Your title cannot be longer than {{ limit }} characters"

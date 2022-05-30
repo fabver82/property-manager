@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Property;
 use App\Entity\Picture;
+use App\Entity\Price;
 use App\Form\PropertySectionType;
 use App\Form\PropertyType;
+use App\Form\PriceType;
 use App\Form\PictureUploadType;
 use App\Repository\BookingRepository;
+use App\Repository\PriceRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -93,6 +96,30 @@ class PropertyController extends AbstractController
             'property' => $property,
         ]);
     }
+    #[Route('/{id}/prices/new', name: 'app_property_prices_new', methods: ['GET', 'POST'])]
+    public function priceNew(Request $request, Property $property, PriceRepository $priceRepository): Response
+    {
+        $price = new Price();
+        dump($property);
+        $price->setProperty($property);
+        $form = $this->createForm(PriceType::class, $price);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $priceRepository->add($price, true);
+
+            return $this->redirectToRoute('app_property_prices', ['id'=>$property->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('back/price/new.html.twig', [
+            'property' => $property,
+            'price' => $price,
+            'form' => $form,
+            'pageBC' => 'New Price',
+            'categoryBC' => $this->category,
+        ]);
+    }
+
     #[Route('/{id}/edit', name: 'app_property_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Property $property, PropertyRepository $propertyRepository): Response
     {
@@ -106,7 +133,7 @@ class PropertyController extends AbstractController
         }
 
         return $this->renderForm('back/property/edit.html.twig', [
-            'pageBC' => 'Edit',
+            'pageBC' => 'Edit price',
             'categoryBC' => $this->category,
             'property' => $property,
             'form' => $form,

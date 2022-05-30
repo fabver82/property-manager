@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Price;
+use App\Entity\Property;
 use App\Form\PriceType;
 use App\Repository\PriceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,26 +26,28 @@ class PriceController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_price_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PriceRepository $priceRepository): Response
-    {
-        $price = new Price();
-        $form = $this->createForm(PriceType::class, $price);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $priceRepository->add($price, true);
-
-            return $this->redirectToRoute('app_price_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('back/price/new.html.twig', [
-            'price' => $price,
-            'form' => $form,
-            'pageBC' => 'New',
-            'categoryBC' => $this->category,
-        ]);
-    }
+//    #[Route('/new', name: 'app_price_new', methods: ['GET', 'POST'])]
+//    public function new(Request $request, Property $property, PriceRepository $priceRepository): Response
+//    {
+//        $price = new Price();
+//        dump($property);
+////        $price->setProperty();
+//        $form = $this->createForm(PriceType::class, $price);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $priceRepository->add($price, true);
+//
+//            return $this->redirectToRoute('app_price_index', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('back/price/new.html.twig', [
+//            'price' => $price,
+//            'form' => $form,
+//            'pageBC' => 'New',
+//            'categoryBC' => $this->category,
+//        ]);
+//    }
 
     #[Route('/{id}', name: 'app_price_show', methods: ['GET'])]
     public function show(Price $price): Response
@@ -59,16 +62,18 @@ class PriceController extends AbstractController
     #[Route('/{id}/edit', name: 'app_price_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Price $price, PriceRepository $priceRepository): Response
     {
+        $property = $price->getProperty();
+        dump($property);
         $form = $this->createForm(PriceType::class, $price);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $priceRepository->add($price, true);
 
-            return $this->redirectToRoute('app_price_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_property_prices', ['id'=>$property->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/price/edit.html.twig', [
+            'property' => $property,
             'price' => $price,
             'form' => $form,
             'pageBC' => 'Edit',
@@ -79,10 +84,11 @@ class PriceController extends AbstractController
     #[Route('/{id}', name: 'app_price_delete', methods: ['POST'])]
     public function delete(Request $request, Price $price, PriceRepository $priceRepository): Response
     {
+        $property = $price->getProperty();
         if ($this->isCsrfTokenValid('delete'.$price->getId(), $request->request->get('_token'))) {
             $priceRepository->remove($price, true);
         }
 
-        return $this->redirectToRoute('app_price_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_property_prices', ['id'=>$property->getId()], Response::HTTP_SEE_OTHER);
     }
 }
