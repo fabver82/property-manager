@@ -35,9 +35,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $lastName;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $nbguest;
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $nationality;
 
@@ -149,18 +146,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getNbguest(): ?int
-    {
-        return $this->nbguest;
-    }
-
-    public function setNbguest(?int $nbguest): self
-    {
-        $this->nbguest = $nbguest;
 
         return $this;
     }
