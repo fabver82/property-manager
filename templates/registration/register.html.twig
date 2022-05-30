@@ -1,21 +1,65 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en" dir="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link href="{{ asset('back/css/themes/lite-purple.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="auth-layout-wrap" style="background-image: url({{ asset('back/images/photo-wide-4.jpg') }})">
+    <div class="auth-content">
+        <div class="card o-hidden">
+            <div class="row">
+                <div class="col-md-6 text-center" style="background-size: cover;background-image: url({{ asset('back/images/photo-long-3.jpg') }})">
+                    <div class="pl-3 auth-right">
+                        <div class="auth-logo text-center mt-4"><img src="{{ asset('back/images/logo.png') }}" alt=""></div>
+{#                        <div class="flex-grow-1"></div>#}
+{#                        <div class="w-100 mb-4"><a class="btn btn-outline-primary btn-block btn-icon-text btn-rounded" href="signin.html"><i class="i-Mail-with-At-Sign"></i> Sign in with Email</a><a class="btn btn-outline-google btn-block btn-icon-text btn-rounded"><i class="i-Google-Plus"></i> Sign in with Google</a><a class="btn btn-outline-facebook btn-block btn-icon-text btn-rounded"><i class="i-Facebook-2"></i> Sign in with Facebook</a></div>#}
+{#                        <div class="flex-grow-1"></div>#}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-4">
+                        <h1 class="mb-3 text-18">Sign Up</h1>
+                        {{ form_start(registrationForm) }}
+                            {% for flash_error in app.flashes('verify_email_error') %}
+                                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                            {% endfor %}
+                            <div class="form-group">
+                                {{ form_row(registrationForm.username,{'attr': {'class': 'form-control form-control-rounded'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.email,{'attr': {'class': 'form-control form-control-rounded'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.firstName,{'attr': {'class': 'form-control form-control-rounded'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.lastName,{'attr': {'class': 'form-control form-control-rounded'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.plainPassword, {
+                                    label: 'Password',
+                                    attr: {'class': 'form-control form-control-rounded'},
+                                }) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.agreeTerms,{'attr': {'class': 'form-control form-control-rounded'}}) }}
+                            </div>
+                            <button class="btn btn-primary btn-block btn-rounded mt-3" type="submit">Register</button>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
 
-{% block title %}Register{% endblock %}
 
-{% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
 
-    <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
