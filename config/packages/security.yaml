@@ -25,13 +25,15 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-            secured_area:
-                login_form:
-                    enable_csrf: true
+            logout:
+                path: app_logout
+        secured_area:
+            form_login:
+                enable_csrf: true
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
