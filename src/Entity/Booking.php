@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BookingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -14,9 +15,23 @@ class Booking
     private $id;
 
     #[ORM\Column(type: 'date')]
+    /**
+     * @Assert\NotNull
+     * @Assert\Range(
+     *      min = "now",
+     *      max = "+1 years"
+     * )
+     */
     private $start_date;
 
     #[ORM\Column(type: 'date')]
+    /**
+     * @Assert\NotNull
+     * @Assert\Expression(
+     *     "this.getEndDate() >= this.getStartDate()",
+     *     message="This value couldn't be before start date"
+     * )
+     */
     private $end_date;
 
     #[ORM\ManyToOne(targetEntity: Property::class, inversedBy: 'bookings')]
@@ -24,13 +39,16 @@ class Booking
     private $property;
 
     #[ORM\Column(type: 'integer')]
+    /**
+     * @Assert\Positive
+     */
     private $nb_guest;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $comment;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private $status;
+    private $status='inquiry';
 
     public function getId(): ?int
     {
