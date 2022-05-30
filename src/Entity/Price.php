@@ -43,13 +43,13 @@ class Price
      *     "this.getEndDate() >= this.getStartDate()",
      *     message="This value couldn't be before start date"
      * )
-     * @Assert\Range(
-     *      max = "+1 years"
-     * )
      */
     private $end_date;
 
     #[ORM\Column(type: 'float')]
+    /**
+     * @Assert\Positive
+     */
     private $price;
 
     #[ORM\ManyToOne(targetEntity: Property::class, inversedBy: 'prices')]

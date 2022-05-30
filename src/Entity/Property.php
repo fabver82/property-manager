@@ -63,6 +63,7 @@ class Property
     private $bookings;
 
     #[ORM\OneToMany(mappedBy: 'property', targetEntity: Price::class)]
+    #[ORM\OrderBy(["start_date" => "ASC"])]
     private $prices;
 
     public function __construct()
