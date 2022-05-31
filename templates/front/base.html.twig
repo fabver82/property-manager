@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    {%  block metas %}
+        <!-- Meta Tags -->
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+        <!-- Author -->
+        <meta name="author" content="Fabien Vermeiren">
+        <!-- description -->
+        <meta name="description" content="{{ meta_description }}">
+        <!-- keywords -->
+        <meta name="keywords" content="{{ meta_keywords }}">
+    {%  endblock %}
+        <title>{{ website_title }}</title>
+        <link rel="icon" href="{{ asset('front/vendor/img/favicon.ico') }}">
+    {% block stylesheets %}
+        <!-- Bundle -->
+        <link rel="stylesheet" href="{{ asset('front/vendor/css/bundle.min.css') }}">
+        <!-- Plugin Css -->
+        <link rel="stylesheet" href="{{ asset('front/vendor/css/jquery.fancybox.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/vendor/css/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/vendor/css/swiper.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/vendor/css/wow.css') }}">
+        <!-- Slider Settings -->
+        <link rel="stylesheet" href="{{ asset('front/vendor/css/LineIcons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/travelling/css/settings.css') }}">
+        <!-- Style Sheet -->
+        <link rel="stylesheet" href="{{ asset('front/travelling/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('front/travelling/css/datepicker.css') }}">
+    {% endblock %}
+    </head>
+    <body data-offset="50" data-spy="scroll" data-target=".navbar">
+        {{ include('front/includes/_preloader.html.twig') }}
+        <header>
+            {{ include('front/includes/_navigation.html.twig') }}
+        </header>
+
+            {{ include('front/section/_slider.html.twig') }}
+
+    {% block javascripts %}
+        <!-- JavaScript -->
+        <script src="{{ asset('front/vendor/js/bundle.min.js') }}"></script>
+        <!-- Plugin Js -->
+        <script src="{{ asset('front/vendor/js/jquery.fancybox.min.js') }}"></script>
+        <script src="{{ asset('front/vendor/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('front/vendor/js/swiper.min.js') }}"></script>
+        <script src="{{ asset('front/vendor/js/wow.min.js') }}"></script>
+        <!-- custom script -->
+        <script src="{{ asset('front/vendor/js/contact_us.js') }}"></script>
+        <script src="{{ asset('front/travelling/js/datepicker.js') }}"></script>
+        <script src="{{ asset('front/travelling/js/script.js') }}"></script>
+    {%  endblock %}
+    </body>
+</html>
