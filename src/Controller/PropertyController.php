@@ -192,6 +192,7 @@ class PropertyController extends AbstractController
             'form' => $form,
         ]);
     }
+    //    TODO: refactor picture deletion into a specific controller ?
     #[Route('/delete/picture/{id}', name: 'app_picture_delete', methods: ['DELETE'])]
     public function deletePicture(Picture $picture, PictureRepository $pictureRepo, Request $request):JsonResponse
     {
