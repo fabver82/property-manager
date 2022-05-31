@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
     <link href="{{  asset('back/css/themes/lite-purple.min.css') }}" rel="stylesheet" />
     <link href="{{  asset('back/css/plugins/perfect-scrollbar.min.css')}}" rel="stylesheet" />
+    {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
 
@@ -46,6 +47,7 @@
 <script src="{{ asset('back/js/plugins/perfect-scrollbar.min.js')}}"></script>
 <script src="{{ asset('back/js/scripts/script.min.js')}}"></script>
 <script src="{{ asset('back/js/scripts/sidebar.large.script.min.js')}}"></script>
+{{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
 
