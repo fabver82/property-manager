@@ -31,6 +31,9 @@ class Picture
     #[ORM\ManyToOne(targetEntity: Page::class, inversedBy: 'pictures')]
     private $page;
 
+    #[ORM\ManyToOne(targetEntity: Settings::class, inversedBy: 'landing_slider_picture')]
+    private $landing_slider;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class Picture
     public function setPage(?Page $page): self
     {
         $this->page = $page;
+
+        return $this;
+    }
+
+    public function getLandingSlider(): ?Settings
+    {
+        return $this->landing_slider;
+    }
+
+    public function setLandingSlider(?Settings $landing_slider): self
+    {
+        $this->landing_slider = $landing_slider;
 
         return $this;
     }
