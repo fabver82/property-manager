@@ -56,9 +56,11 @@
                 <li class="nav-item">
                     <a class="nav-link scroll" href="#gallery">Gallery</a>
                 </li>
+                {%  if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
-                    <a class="nav-link scroll" href="#testimonials">Testimonials</a>
+                    <a class="nav-link" href="{{ path('admin') }}">Admin</a>
                 </li>
+                {%  endif %}
                 <li class="nav-item">
                     <a class="nav-link scroll" href="#contact">Contact</a>
                 </li>

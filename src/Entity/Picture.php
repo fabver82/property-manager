@@ -34,6 +34,9 @@ class Picture
     #[ORM\ManyToOne(targetEntity: Settings::class, inversedBy: 'landing_slider_picture')]
     private $landing_slider;
 
+//    public function __toString(){
+//        return '<img src="public/uploads/'.$this->getFilename().'"/>';
+//    }
     public function getId(): ?int
     {
         return $this->id;
