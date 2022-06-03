@@ -4,9 +4,9 @@
         <div class="container">
             <div class="row ">
                 <div class="col-lg-12 text-center text-area wow fadeInDown" data-wow-delay="1000ms">
-                    <h5 class="subheading">Let us search your</h5>
-                    <h2 class="heading">Dream Destination</h2>
-                    <p class="text">Lorem ipsum is simply dummy text of the printing and typesetting. Lorem<br> Ipsum has been the industry’s standard dummy.  Lorem Ipsum has been the<br> industry’s standard dummy.</p>
+{#                    <h5 class="subheading">Let us search your</h5>#}
+                    <h2 class="heading">{{ settings.landingTitle }}</h2>
+                    <p class="text">{{ settings.landingText }}</p>
                 </div>
                 <!-- </div> -->
             </div>
@@ -15,18 +15,26 @@
     </div>
     <div class="social-icons">
         <ul class="slider-social wow fadeInRight" data-wow-delay="1000ms">
-            <li><a class="icon-hover wow" href="#.">
+            {% if settings.socialFB is not null %}
+            <li><a class="icon-hover wow" href="{{ settings.socialFB }}">
                     <i class="fab fa-facebook-f"></i></a>
             </li>
-            <li><a class="icon-hover" href="#.">
+            {%  endif %}
+            {% if settings.socialTwitter is not null %}
+            <li><a class="icon-hover" href="{{ settings.socialTwitter }}">
                     <i class="fab fa-twitter"></i></a>
             </li>
-            <li><a class="icon-hover" href="#.">
+            {%  endif %}
+            {% if settings.socialLinkedIn is not null %}
+            <li><a class="icon-hover" href="{{ settings.socialLinkedIn }}">
                     <i class="fab fa-linkedin-in"></i></a>
             </li>
-            <li><a class="icon-hover" href="#.">
+            {%  endif %}
+            {% if settings.socialInsta is not null %}
+            <li><a class="icon-hover" href="{{ settings.socialInsta }}">
                     <i class="fab fa-instagram"></i></a>
             </li>
+            {% endif %}
         </ul>
     </div>
     <div class="text-center slider-carousel owl-carousel owl-themes active">

@@ -1,4 +1,6 @@
 {{ form_start(form) }}
+{#TODO:make this form asynchronous with stimulus#}
+    <img src="{{ asset('/uploads/logo.png') }}" width="50px">
     {{ form_widget(form) }}
     {{ form_errors(form) }}
     <button class="btn" type="submit">{{ button_label|default('Save') }}</button>
