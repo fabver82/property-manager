@@ -1,0 +1,23 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Edit {{ categoryBC }}{% endblock %}
+{% block stylesheets%}
+    {{ parent()}}
+    <link href="{{ asset('back/js/plugins/tinymce/skins/ui/tinymce-5/skin.min.css')}}" rel="stylesheet" />
+{% endblock %}
+{% block body %}
+    <h1>Edit {{ categoryBC }}</h1>
+
+    {{ include('back/settings/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('back/js/plugins/tinymce/tinymce.min.js')}}"></script>
+    <!-- Initialize tinymce editor -->
+    <script>
+        tinymce.init({
+            selector: '.tinymce'
+        });
+    </script>
+{% endblock %}
