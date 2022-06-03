@@ -20,7 +20,7 @@
                 {% endfor %}
                 {% for page in pages %}
                 <li class="nav-item">
-                    <a class="nav-link  scroll" href="{{  path('app_page_show',{ 'title': page.title }) }}">{{ page.title }}</a>
+                    <a class="nav-link  scroll" href="{{  path('page_show',{ 'title': page.title}) }}">{{ page.title }}</a>
                 </li>
                 {% endfor %}
                 <li class="nav-item">
@@ -56,7 +56,7 @@
                 </li>
                 {% for page in pages %}
                 <li class="nav-item">
-                    <a class="nav-link  scroll" href="{{  path('app_page_show',{ 'title': page.title }) }}">{{ page.title }}</a>
+                    <a class="nav-link  scroll" href="{{  path('page_show',{ 'title': page.title }) }}">{{ page.title }}</a>
                 </li>
                 {%  endfor %}
                 {%  if is_granted('ROLE_ADMIN') %}

@@ -38,16 +38,10 @@
         </ul>
     </div>
     <div class="text-center slider-carousel owl-carousel owl-themes active">
-        <div class="item active"><img src="travelling/img/slider-img1.jpg" alt="slider-img"></div>
-        <div class="item"><img src="travelling/img/slider-img2.jpg" alt="slider-img"></div>
-        <div class="item"><img src="travelling/img/slider-img3.jpg" alt="slider-img"></div>
-        <div class="item"><img src="travelling/img/slider-img4.jpg" alt="slider-img"></div>
-        <div class="item"><img src="travelling/img/slider-img5.jpg" alt="slider-img"></div>
-        <!--             <div class="item active" style="background-image: url('travelling/img/slider-img1.jpg')"></div>
-                    <div class="item" style="background-image: url('travelling/img/slider-img2.jpg')"></div>
-                    <div class="item" style="background-image: url('travelling/img/slider-img3.jpg')"></div>
-                    <div class="item" style="background-image: url('travelling/img/slider-img4.jpg')"></div>
-                    <div class="item" style="background-image: url('travelling/img/slider-img5.jpg')"></div> -->
+        {% for picture in settings.landingSliderPicture %}
+        <div class="item active"><img src="{{ asset('/uploads/' ~ picture.filename) }}" alt="slider-img"></div>
+        {%  endfor %}
     </div>
+
 </section>
 <!-- Slider Section End -->

@@ -64,15 +64,8 @@ class SettingsController extends AbstractController
     public function slider_add(Picture $picture,SettingsRepository $settingsRepository,Request $request): Response
     {
         $settings = $settingsRepository->find(1);
-//        $data = json_decode($request->getContent(),true);
-//        if($this->isCsrfTokenValid('delete'.$picture->getId(),$data['_token'])){
         $settings->addLandingSliderPicture($picture);
         $settingsRepository->add($settings,true);
         return $this->redirectToRoute('app_slider', ['id'=>$settings->getId()], Response::HTTP_SEE_OTHER);
-
-//            return new JsonResponse(['success' => 1]);
-//        }else{
-//            return new JsonResponse(['error' => 'Invalid Token'],400);
-//        }
     }
 }
