@@ -25,6 +25,13 @@ class SettingsController extends AbstractController
         $form = $this->createForm(SettingsType::class, $settings);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $logo = $form->get('logo')->getData();
+            $file = 'logo.'.$logo->guessExtension();
+            $logo->move(
+                $this->getParameter('pictures_directory'),
+                $file
+            );
+            $settings->setLogo($file);
             $settingsRepository->add($settings, true);
 
             return $this->redirectToRoute('app_settings', ['id'=>$settings->getId()], Response::HTTP_SEE_OTHER);
