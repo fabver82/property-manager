@@ -1,0 +1,31 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Edit {{ categoryBC }}{% endblock %}
+
+{% block body %}
+    <h1>Slider Pictures</h1>
+    <div class="row">
+        {% if slider_pictures|length > 0 %}
+            {% for picture in slider_pictures %}
+                {{ include('back/settings/_pictureCard.html.twig') }}
+            {%  endfor %}
+        {% else %}
+            <div class="alert alert-danger" role="alert"><strong class="text-capitalize">No Pictures!</strong> you don't have any pictures in your slider.
+            </div>
+        {% endif %}
+    </div>
+    <h2>Add Pictures</h2>
+    <div class="row">
+        {% if pictures|length > 0 %}
+            {% for picture in pictures %}
+                {{ include('back/settings/_pictureCard.html.twig') }}
+            {%  endfor %}
+        {% else %}
+            <div class="alert alert-danger" role="alert"><strong class="text-capitalize">No Pictures!</strong> you don't have any pictures.
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+

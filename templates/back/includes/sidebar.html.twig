@@ -1,7 +1,7 @@
 <div class="side-content-wrap">
     <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
         <ul class="navigation-left">
-            <li class="nav-item"><a class="nav-item-hold" href="{{path('app_settings', {id: '1'})}}"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Settings</span></a>
+            <li class="nav-item" data-item="settings">><a class="nav-item-hold" href="{{path('app_settings', {id: '1'})}}"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Settings</span></a>
                 <div class="triangle"></div>
             </li>
             <li class="nav-item" data-item="properties"><a class="nav-item-hold" href="{{path('app_property_index')}}"><i class="nav-icon i-Building"></i><span class="nav-text">Properties</span></a>
@@ -41,9 +41,10 @@
     </div>
     <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
         <!-- Submenu Dashboards-->
-        <ul class="childNav" data-parent="dashboard">
+        <ul class="childNav" data-parent="settings">
 
-{#            <li class="nav-item"><a href="#"><i class="nav-icon i-Data"></i><span class="item-name">List</span></a></li>#}
+            <li class="nav-item"><a href="{{path('app_settings', {id: '1'})}}"><i class="nav-icon i-Data"></i><span class="item-name">Basic Infos</span></a></li>
+            <li class="nav-item"><a href="{{path('app_slider', {id: '1'})}}"><i class="nav-icon i-Data"></i><span class="item-name">Slider</span></a></li>
         </ul>
         <ul class="childNav" data-parent="properties">
             <li class="nav-item bg-success"><a href="{{path('app_property_new')}}"><i class="nav-icon i-Add"></i><span class="item-name">Add New Property</span></a></li>

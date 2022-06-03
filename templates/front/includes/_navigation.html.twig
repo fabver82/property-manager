@@ -11,9 +11,16 @@
                 <li class="nav-item  active">
                     <a class="nav-link scroll" href="{{ path('app_front') }}">Home</a>
                 </li>
+{#                TODO: make it a dropdown#}
+                {% for property in properties %}
+                    <li class="nav-item">
+{#                        TODO: create slug instead of using id in the link#}
+                        <a class="nav-link  scroll" href="{{  path('app_property',{ 'id': property.id }) }}">{{ property.title }}</a>
+                    </li>
+                {% endfor %}
                 {% for page in pages %}
                 <li class="nav-item">
-                    <a class="nav-link  scroll" href="{{  path('app_page',{ 'title': page.title }) }}">{{ page.title }}</a>
+                    <a class="nav-link  scroll" href="{{  path('app_page_show',{ 'title': page.title }) }}">{{ page.title }}</a>
                 </li>
                 {% endfor %}
                 <li class="nav-item">
@@ -29,6 +36,7 @@
         <span></span>
     </a>
     <a class="number">
+{#        TODO: use host details to show email or phone#}
         <p>+1 631 123 4567 </p>
     </a>
 </nav>
@@ -48,7 +56,7 @@
                 </li>
                 {% for page in pages %}
                 <li class="nav-item">
-                    <a class="nav-link  scroll" href="{{  path('app_page',{ 'title': page.title }) }}">{{ page.title }}</a>
+                    <a class="nav-link  scroll" href="{{  path('app_page_show',{ 'title': page.title }) }}">{{ page.title }}</a>
                 </li>
                 {%  endfor %}
                 {%  if is_granted('ROLE_ADMIN') %}
