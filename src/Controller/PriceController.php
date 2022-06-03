@@ -63,7 +63,7 @@ class PriceController extends AbstractController
     public function edit(Request $request, Price $price, PriceRepository $priceRepository): Response
     {
         $property = $price->getProperty();
-        dump($property);
+//        dump($property);
         $form = $this->createForm(PriceType::class, $price);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
