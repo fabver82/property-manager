@@ -39,6 +39,9 @@ class Settings
     #[ORM\OneToMany(mappedBy: 'landing_slider', targetEntity: Picture::class)]
     private $landing_slider_picture;
 
+    #[ORM\Column(type: 'string', length: 10, nullable: true)]
+    private $currency;
+
     public function __construct()
     {
         $this->landing_slider_picture = new ArrayCollection();
@@ -159,6 +162,18 @@ class Settings
                 $landingSliderPicture->setLandingSlider(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?string $currency): self
+    {
+        $this->currency = $currency;
 
         return $this;
     }
