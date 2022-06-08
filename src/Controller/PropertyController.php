@@ -143,9 +143,16 @@ class PropertyController extends AbstractController
     public function createSection(Request $request, Picture $picture, PictureRepository $pictureRepository): Response
     {
         $form = $this->createForm(PropertySectionType::class, $picture);
+        $property = $picture->getProperty();
+        if (!is_null($property->getMainPicture()) && $property->getMainPicture()->getId()==$picture->getId()){
+            $form->get('main_picture_id')->setData(true);
+        }
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if($form->get('main_picture_id')->getData()){
+                $property->setMainPicture($picture);
+            };
             $pictureRepository->add($picture, true);
 
             return $this->redirectToRoute('app_property_pictures', ['id'=>$picture->getProperty()->getId()], Response::HTTP_SEE_OTHER);
@@ -154,7 +161,7 @@ class PropertyController extends AbstractController
         return $this->renderForm('back/property/edit.html.twig', [
             'pageBC' => 'Edit',
             'categoryBC' => $this->category,
-            'property' => $picture->getProperty(),
+            'property' => $property,
             'form' => $form,
         ]);
     }

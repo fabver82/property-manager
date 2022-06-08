@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row no-gutters row-1">
             <div class="col-lg-12 col-md-12 col-sm-12 text-center wow fadeInDown" data-wow-delay="400ms">
-                <h2 class="heading">Explore Our <br><span>Luxuries Destinations</span></h2>
-                <p class="subheading">Lorem ipsum is simply dummy text </p>
+                <h2 class="heading">Explore Our <br><span>Luxuries Properties</span></h2>
+                <p class="subheading">click on a listing to get more details</p>
             </div>
         </div>
         <!-- Row-2 Start -->
@@ -12,7 +12,7 @@
             {%  for property in properties %}
             <div class="col-lg-4 col-md-12 col-sm-12 destination wow fadeInDown" data-wow-delay="400ms">
                 <a class="card" href="travelling/destinations.html" >
-                    <img src="{{ asset('/uploads/' ~ property.pictures.first.filename) }}"  alt="destination-img" style="width:347px">
+                    <img src="{{ asset('/uploads/' ~ property.mainPicture.filename) }}"  alt="destination-img" style="width:347px">
                     <div class="card-body">
                         <h5 class="card-title">{{ property.title }} <span>${{ property.minPrice }}</span></h5>
                         <div class="card-text">
