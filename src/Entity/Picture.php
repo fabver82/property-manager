@@ -34,6 +34,9 @@ class Picture
     #[ORM\ManyToOne(targetEntity: Settings::class, inversedBy: 'landing_slider_picture')]
     private $landing_slider;
 
+    #[ORM\ManyToOne(targetEntity: Page::class, inversedBy: 'section')]
+    private $section;
+
 //    public function __toString(){
 //        return '<img src="public/uploads/'.$this->getFilename().'"/>';
 //    }
@@ -122,6 +125,18 @@ class Picture
     public function setLandingSlider(?Settings $landing_slider): self
     {
         $this->landing_slider = $landing_slider;
+
+        return $this;
+    }
+
+    public function getSection(): ?Page
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Page $section): self
+    {
+        $this->section = $section;
 
         return $this;
     }
