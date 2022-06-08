@@ -9,10 +9,10 @@
                 <div class="detail-box">
                     <div class="text-box wow fadeIn" data-wow-delay="400ms">
                         <p class="subheading"><span></span>{{ settings.landingTitle }}</p>
-                        <h2 class="heading">{{ property.title }} <br/> Pool : {{ property.pool}} </h2>
+                        <h2 class="heading">{{ property.title }} <br/>  </h2>
                         {% set rawtext = property.description|raw %}
-                        {% set text = rawtext|length > 300 ? rawtext|slice(0, 300) ~ '...' : rawtext %}
-                        <p class="text">{{ text }}</p>
+                        {% set text = rawtext|length > 500 ? rawtext|slice(0, 500) ~ '...' : rawtext %}
+                        <p class="text">{{ text|raw }}</p>
                         <div class="button-center">
                             <a class="btn button btn-rounded green-btn btn-hvr-blue scroll"  href="#contact">
                                 Book Room Now

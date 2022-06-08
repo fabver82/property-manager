@@ -66,6 +66,9 @@ class Property
     #[ORM\OrderBy(["start_date" => "ASC"])]
     private $prices;
 
+    #[ORM\OneToOne(targetEntity: Picture::class, cascade: ['persist', 'remove'])]
+    private $main_picture;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
@@ -252,6 +255,18 @@ class Property
                 $price->setProperty(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMainPicture(): ?Picture
+    {
+        return $this->main_picture;
+    }
+
+    public function setMainPicture(?Picture $main_picture): self
+    {
+        $this->main_picture = $main_picture;
 
         return $this;
     }
