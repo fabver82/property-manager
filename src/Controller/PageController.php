@@ -6,6 +6,7 @@ use App\Entity\Page;
 use App\Entity\Picture;
 use App\Form\PageType;
 use App\Form\PictureUploadType;
+use App\Form\PageSectionType;
 use App\Repository\PageRepository;
 use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -87,6 +88,32 @@ class PageController extends AbstractController
             'form' => $form,
             'categoryBC' => $this->category,
             'pageBC' => 'Edit',
+        ]);
+    }
+    #[Route('/{id}/picture/edit', name: 'page_section_edit', methods: ['GET', 'POST'])]
+    public function createSection(Request $request, Picture $picture, PictureRepository $pictureRepository): Response
+    {
+        $form = $this->createForm(PageSectionType::class, $picture);
+        $page = $picture->getPage();
+        if (!is_null($page->getBanner()) && $page->getBanner()->getId()==$picture->getId()){
+            $form->get('banner')->setData(true);
+        }
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if($form->get('banner')->getData()){
+                $page->setBanner($picture);
+            };
+            $pictureRepository->add($picture, true);
+
+            return $this->redirectToRoute('app_page_show', ['id'=>$picture->getPage()->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('back/page/edit.html.twig', [
+            'pageBC' => 'Edit',
+            'categoryBC' => $this->category,
+            'page' => $page,
+            'form' => $form,
         ]);
     }
     #[Route('/{id}/pictures', name: 'app_page_pictures', methods: ['GET','POST'])]
