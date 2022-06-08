@@ -1,16 +1,18 @@
 <!-- Gallery Section Start -->
 <section class="gallery-section" id="gallery">
     <div class=" text-center gallery-carousel owl-carousel owl-themes active">
-        {% for picture in settings.landingSliderPicture %}
+        {% for property in properties %}
         <div class="item">
 {#            check item active class#}
-            <img src="{{ asset('/uploads/' ~ picture.filename) }}" alt="gallery-img" style="height: 844px;">
+            <img src="{{ asset('/uploads/' ~ property.pictures.first.filename) }}" alt="gallery-img" style="height: 844px;">
             <div class="container">
                 <div class="detail-box">
                     <div class="text-box wow fadeIn" data-wow-delay="400ms">
-                        <p class="subheading"><span></span>Beautiful Room</p>
-                        <h2 class="heading">A beautiful luxuries <br> Hotel Room in centre of new York</h2>
-                        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere nisi est, sed ullamcorper nibh volutpat at. In rutrum, metus ut posuere gravida, tellus lacus faucibus lectus, sed cursus eros ligula non odio. Suspendisse volutpat sagittis sapien. Curabitur quis malesuada ipsum.</p>
+                        <p class="subheading"><span></span>{{ settings.landingTitle }}</p>
+                        <h2 class="heading">{{ property.title }} <br/> Pool : {{ property.pool}} </h2>
+                        {% set rawtext = property.description|raw %}
+                        {% set text = rawtext|length > 300 ? rawtext|slice(0, 300) ~ '...' : rawtext %}
+                        <p class="text">{{ text }}</p>
                         <div class="button-center">
                             <a class="btn button btn-rounded green-btn btn-hvr-blue scroll"  href="#contact">
                                 Book Room Now

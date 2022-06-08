@@ -666,7 +666,8 @@ a{
     Slider Section
 ====================================== */
 .slider-area .slider-overlay{
-  background-color: rgba(77,156,202, 0.8);
+  background-color: rgba(77, 156, 202, 0.51);
+  /*background-color: rgba(181, 245, 125, 0.8);*/
   position: absolute;
   left: 0;
   right: 0;

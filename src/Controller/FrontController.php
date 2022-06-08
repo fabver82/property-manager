@@ -28,7 +28,7 @@ class FrontController extends AbstractController
             'properties' => $properties,
         ]);
     }
-    #[Route('/{title}', name: 'front_page_show')]
+    #[Route('/page/{title}', name: 'front_pages_show')]
     public function page(SettingsRepository $settingsRepository, PageRepository $pageRepository,Page $page,int $id=1): Response
     {
         $settings = $settingsRepository->find($id);

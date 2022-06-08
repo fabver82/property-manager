@@ -71,4 +71,12 @@ class SettingsController extends AbstractController
         $settingsRepository->add($settings,true);
         return $this->redirectToRoute('app_slider', ['id'=>$settings->getId()], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/slider/remove/{id}', name: 'app_slider_remove', methods: ['GET','POST'])]
+    public function slider_remove(Picture $picture,SettingsRepository $settingsRepository,Request $request): Response
+    {
+        $settings = $settingsRepository->find(1);
+        $settings->removeLandingSliderPicture($picture);
+        $settingsRepository->add($settings,true);
+        return $this->redirectToRoute('app_slider', ['id'=>$settings->getId()], Response::HTTP_SEE_OTHER);
+    }
 }

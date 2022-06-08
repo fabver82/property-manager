@@ -7,7 +7,7 @@
     <div class="row">
         {% if slider_pictures|length > 0 %}
             {% for picture in slider_pictures %}
-                {{ include('back/settings/_pictureCard.html.twig') }}
+                {{ include('back/settings/_pictureCardInSlider.html.twig') }}
             {%  endfor %}
         {% else %}
             <div class="alert alert-danger" role="alert"><strong class="text-capitalize">No Pictures!</strong> you don't have any pictures in your slider.
