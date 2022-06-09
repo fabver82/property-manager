@@ -91,7 +91,7 @@ class PageController extends AbstractController
         ]);
     }
     #[Route('/{id}/picture/edit', name: 'page_section_edit', methods: ['GET', 'POST'])]
-    public function createSection(Request $request, Picture $picture, PictureRepository $pictureRepository): Response
+    public function createSection(Request $request, Picture $picture, PictureRepository $pictureRepository, PageRepository $pageRepository): Response
     {
         $form = $this->createForm(PageSectionType::class, $picture);
         $page = $picture->getPage();
@@ -103,7 +103,10 @@ class PageController extends AbstractController
 
             if($form->get('banner')->getData()){
                 $page->setBanner($picture);
-            };
+            } else {
+                $page->addSection($picture);
+                dump($page);
+            }
             $pictureRepository->add($picture, true);
 
             return $this->redirectToRoute('app_page_show', ['id'=>$picture->getPage()->getId()], Response::HTTP_SEE_OTHER);
