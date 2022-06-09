@@ -14942,13 +14942,13 @@ section.ui-block-25 {
 }
 
 .ui-block-10.prices .price-list{
-    border-bottom: 2px solid #c29e75;
+    border-bottom: 2px solid rgba(77,156,202,0.58);
     padding: 25px 16px 25px 12px;
     font-family: 'Open Sans' , sans-serif;
     cursor: pointer;
-    background: -webkit-gradient(linear, left top, right top, color-stop(50%, rgba(212, 200, 187, 0.61)), color-stop(50%, white));
-    background: -o-linear-gradient(left, rgba(194, 158, 117, 0.61) 50%, white 50%);
-    background: linear-gradient(to right, rgba(194, 158, 117, 0.61) 50%, white 50%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(50%, rgba(77,156,202,0.58)), color-stop(50%, white));
+    background: -o-linear-gradient(left, rgba(77,156,202,0.58) 50%, white 50%);
+    background: linear-gradient(to right, rgba(77,156,202,0.58) 50%, white 50%);
     background-size: 200% 100%;
     background-position: right bottom;
     -webkit-transition: all .5s ease-out;

@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body %}
     <!-- Banner Start -->
-    <section class="banner" style="background: linear-gradient( rgba(77,156,202, 0.8), rgba(77,156,202, 0.8) ), url('{{ asset('uploads/' ~ page.pictures.first.filename) }}');">
+    <section class="banner" style="background: linear-gradient( rgba(77,156,202, 0.8), rgba(77,156,202, 0.8) ), url('{{ asset('uploads/' ~ page.banner.filename) }}');">
         <div class=" col-12 header-text text-center wow fadeInDown" data-wow-delay="1000ms">
             <h2 class="heading">{{ page.title }}</h2>
 {#            <ul class="page-breadcrumb ">#}

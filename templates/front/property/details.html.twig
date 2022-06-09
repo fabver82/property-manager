@@ -148,13 +148,23 @@
                                     <div class="rates d-flex justify-content-between">
                                         <div class="info">
                                             <h6 class="main-heading text-grey font-weight-bold">{{ price.name }}</h6>
-                                            <h6 class="sub-heading text-grey">From {{ price.startDate|date("m/d/Y") }} to {{ price.endDate|date("m/d/Y") }}</h6>
+                                            <h6 class="sub-heading text-grey">From {{ price.startDate|date("D jS \\o\\f M o") }} to {{ price.endDate|date("D jS \\o\\f M o") }}</h6>
                                         </div>
                                         <p class="rate text-brown">{{ price.price|format_currency(settings.currency,
                                             {fraction_digit: 0}) }}</p>
                                     </div>
                                 </div>
                             {% endfor %}
+                                <div class="price-list ml-0">
+                                    <div class="rates d-flex justify-content-between">
+                                        <div class="info">
+                                            <h6 class="main-heading text-grey font-weight-bold">Off season</h6>
+                                            <h6 class="sub-heading text-grey">All other dates</h6>
+                                        </div>
+                                        <p class="rate text-brown">{{ property.minPrice|format_currency(settings.currency,
+                                                {fraction_digit: 0}) }}</p>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>

@@ -96,19 +96,37 @@ class PropertyController extends AbstractController
             'property' => $property,
         ]);
     }
+    private function checkPriceExist($price,$property): Bool
+    {
+        foreach($property->getPrices() as $property_price){
+            if (($price->getStartDate()>=$property_price->getStartDate()
+                && $price->getStartDate()<=$property_price->getEndDate())
+            || (
+                $price->getEndDate()>=$property_price->getStartDate()
+                && $price->getEndDate()<=$property_price->getEndDate()
+                ))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     #[Route('/{id}/prices/new', name: 'app_property_prices_new', methods: ['GET', 'POST'])]
     public function priceNew(Request $request, Property $property, PriceRepository $priceRepository): Response
     {
         $price = new Price();
-        dump($property);
+//        dump($property);
         $price->setProperty($property);
         $form = $this->createForm(PriceType::class, $price);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $priceRepository->add($price, true);
+            dump($this->checkPriceExist($price,$property));
+            if (!$this->checkPriceExist($price,$property)){
+                $priceRepository->add($price, true);
+                return $this->redirectToRoute('app_property_prices', ['id'=>$property->getId()], Response::HTTP_SEE_OTHER);
+            }
 
-            return $this->redirectToRoute('app_property_prices', ['id'=>$property->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/price/new.html.twig', [
