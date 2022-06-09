@@ -155,10 +155,14 @@ class PageController extends AbstractController
     {
         $data = json_decode($request->getContent(),true);
         if($this->isCsrfTokenValid('delete'.$picture->getId(),$data['_token'])){
-            unlink($this->getParameter('pictures_directory').'/'.$picture->getFilename());
             $page = $picture->getPage();
+            unlink($this->getParameter('pictures_directory').'/'.$picture->getFilename());
             $page->removePicture($picture);
+            if($page->getBanner()->getId()==$picture->getId()){
+                $page->setBanner(null);
+            }
             $pictureRepo->remove($picture,true);
+
             return new JsonResponse(['success' => 1]);
         }else{
             return new JsonResponse(['error' => 'Invalid Token'],400);

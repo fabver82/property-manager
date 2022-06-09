@@ -152,7 +152,10 @@ class PropertyController extends AbstractController
 
             if($form->get('main_picture_id')->getData()){
                 $property->setMainPicture($picture);
-            };
+            }
+            if ($picture->getId()==$property->getMainPicture()->getId() and !$form->get('main_picture_id')->getData()){
+                $property->setMainPicture(null);
+            }
             $pictureRepository->add($picture, true);
 
             return $this->redirectToRoute('app_property_pictures', ['id'=>$picture->getProperty()->getId()], Response::HTTP_SEE_OTHER);
@@ -206,6 +209,9 @@ class PropertyController extends AbstractController
         if($this->isCsrfTokenValid('delete'.$picture->getId(),$data['_token'])){
             unlink($this->getParameter('pictures_directory').'/'.$picture->getFilename());
             $property = $picture->getProperty();
+            if ($picture->getId()==$property->getMainPicture()->getId()){
+                $property->setMainPicture(null);
+            }
             $property->removePicture($picture);
             $pictureRepo->remove($picture,true);
            return new JsonResponse(['success' => 1]);

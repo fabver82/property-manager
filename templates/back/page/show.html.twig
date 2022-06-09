@@ -48,6 +48,13 @@
                             <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                         </div>
                     {% endif %}
+
+                    {% if page.banner is null %}
+                        <div class="alert alert-warning" role="alert"><strong class="text-capitalize">No Banner!</strong> choose a banner.<br/>
+                            edit one of your picture or <a href="{{ path('app_page_pictures', {'id': page.id}) }}">add a new one</a> to choose a banner for this property
+                            <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -72,6 +79,7 @@
                         }).then(
                             response => response.json()
                         ).then(data=>{
+                            console.log(data);
                             if(data.success)
                                 this.parentElement.parentElement.remove()
                             else
