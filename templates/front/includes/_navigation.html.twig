@@ -15,7 +15,7 @@
                 {% for property in properties %}
                     <li class="nav-item">
 {#                        TODO: create slug instead of using id in the link#}
-                        <a class="nav-link  scroll" href="{{  path('app_property',{ 'id': property.id }) }}">{{ property.title }}</a>
+                        <a class="nav-link" href="{{  path('front_property_show',{ 'id': property.id }) }}">{{ property.title }}</a>
                     </li>
                 {% endfor %}
                 {% for page in pages %}

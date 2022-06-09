@@ -1,0 +1,134 @@
+{% extends 'front/base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/vendor/css/bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/vendor/css/swiper.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/vendor/css/wow.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/vendor/css/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/travelling/css/style.css') }}">
+{% endblock %}
+{% block body %}
+    <!-- Banner Start -->
+    <section class="banner" style="background: linear-gradient( rgba(77,156,202, 0.8), rgba(77,156,202, 0.8) ), url('{{ asset('uploads/' ~ property.pictures.first.filename) }}');">
+        <div class=" col-12 header-text text-center wow fadeInDown" data-wow-delay="1000ms">
+            <h2 class="heading">{{ property.title }}</h2>
+{#            <ul class="page-breadcrumb ">#}
+{#                <li><a href="../index-travelling.html"><i class="fas fa-home mr-1"></i>Home <i class="fas fa-angle-double-right white-icon"></i></a></li>#}
+{#                <li>StandAlone</li>#}
+{#            </ul>#}
+        </div>
+    </section>
+    <!-- Banner End -->
+    <!-- Start Heading Section -->
+{#    {{ dump(property) }}#}
+    <section class="heading-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="detail-body">
+                        <div class="des-detail-sec row">
+                            <div class="col-12 wow fadeInDown" data-wow-delay="1000ms">
+                                <h4 class="heading text-center text-lg-left">Details About {{ property.title }}</h4>
+                                <p class="text text-center text-lg-left">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+                            </div>
+                        </div>
+                        <div class="row destination-list destination-detail">
+                            <div class="col-12 col-lg-6 destination-detail-slider wow fadeInLeft" data-wow-delay="400ms">
+                                <div class="wrapper">
+                                    <div class="Gallery swiper-container img-magnifier-container" id="galery">
+                                        <div class="swiper-wrapper myimgs">
+                                            {% for picture in property.pictures %}
+                                                <div class="swiper-slide"> <a href="{{  '/uploads/' ~ picture.filename }}" data-fancybox="{{ loop.index }}" title="Zoom In"><img class="myimage" src="{{  '/uploads/' ~ picture.filename }}" alt="gallery"/></a></div>
+                                            {% endfor %}
+
+{#                                            <div class="swiper-slide"> <a href="img/detail-slider2.jpg" data-fancybox="2" title="Zoom In"><img class="myimage" src="img/detail-slider2.jpg" alt="thumnails"/></a></div>#}
+{#                                            <div class="swiper-slide"> <a href="img/detail-slider3.jpg" data-fancybox="3" title="Zoom In"><img class="myimage" src="img/detail-slider3.jpg" alt="thumnails"/></a></div>#}
+                                        </div>
+                                    </div>
+                                    <div class="Thumbs swiper-container" id="thumbs">
+                                        <div class="swiper-wrapper">
+                                            {% for picture in property.pictures %}
+                                                <div class="swiper-slide"> <img src="{{  '/uploads/' ~ picture.filename }}" alt="thumnails"/></div>
+                                            {% endfor %}
+{#                                            <div class="swiper-slide"> <img src="img/detail-slider1.jpg" alt="thumnails"/></div>#}
+{#                                            <div class="swiper-slide"> <img src="img/detail-slider2.jpg" alt="thumnails"/></div>#}
+{#                                            <div class="swiper-slide"> <img src="img/detail-slider3.jpg" alt="thumnails"/></div>#}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 text-center text-lg-left wow fadeInRight" data-wow-delay="400ms">
+                                <div class="product-single-price">
+                                    <p class="text">{{ property.description|raw }}</p>
+                                </div>
+                                <div class="destination-checklist text ">
+                                    <ul>
+                                        <li><i class="fas fa-check"></i> Comfortable Residence</li>
+                                        <li><i class="fas fa-check"></i> Beautiful Destinations</li>
+                                        <li><i class="fas fa-check"></i> Satisfaction 100% Guaranteed</li>
+                                    </ul>
+                                </div>
+                                <div class="button-center">
+                                    <a class="btn button btn-rounded green-btn btn-hvr-blue scroll1" href="#inquiry">
+                                        Inquiry
+                                    </a>
+                                </div>
+                                <div class="social-icons">
+                                    <ul>
+                                        <li>
+                                            <p>Share Link:</p>
+                                        </li>
+                                        <li><a class="facebook-hover" href="#."> <i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a class="twitter-hover" href="#."><i class="fab fa-twitter"></i></a></li>
+                                        <li><a class="linked-in-hover" href="#."><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li><a class="instagram-hover" href="#."><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product Detail End -->
+                    </div>
+                    <!-- Product Body End -->
+                </div>
+            </div>
+            <!-- Row End -->
+        </div>
+        <!-- Container End -->
+    </section>
+    <!-- End Heading Section -->
+    <!-- Main Page Start -->
+    <div class="main-page">
+        <div class="container">
+            <!-- Stand Alone text area -->
+            <div class="standalone-area">
+{#                {{ dump(property) }}#}
+
+                {% for section in property.pictures %}
+{#                    {{ dump(section) }}#}
+                    {% if section.room|length %}
+                        {% if loop.index is divisible by(2) %}
+                            {{ include('front/includes/_blockTextImageRight.html.twig') }}
+                        {% else %}
+                            {{ include('front/includes/_blockTextImageLeft.html.twig') }}
+                        {% endif %}
+                    {% endif %}
+
+                {% endfor %}
+
+{#                <div class="row standalone-row align-items-center no-gutters">#}
+{#                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 row-image hover-effect order-2 order-lg-1 wow fadeInLeft" data-wow-delay="300ms">#}
+{#                        <img src="img/standalone-3.jpg" alt="image">#}
+{#                        <div class="standaloneoverlay overlayBottom"></div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 row-text order-1 order-lg-2 wow fadeInRight" data-wow-delay="300ms">#}
+{#                        <p class="subheading">Most flexible one page</p>#}
+{#                        <h2 class="heading">Standalone Heading</h2>#}
+{#                        <p class=" text m-auto ">Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit. Vestibulum auctor nunc vitae diam eleifend, in maximus metus sollicitudin.</p>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+            <!-- Standalone area -->
+        </div>
+        <!-- Container End  -->
+    </div>
+    <!-- Main Page End -->
+{% endblock %}

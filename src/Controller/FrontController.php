@@ -43,15 +43,19 @@ class FrontController extends AbstractController
             'properties' => $properties,
         ]);
     }
-    #[Route('/property/{id}', name: 'app_property')]
-    public function property(SettingsRepository $settingsRepository, PageRepository $pageRepository,Property $property): Response
+    #[Route('/property/{id}', name: 'front_property_show')]
+    public function property(SettingsRepository $settingsRepository, PageRepository $pageRepository,PropertyRepository $propertyRepository,Property $property): Response
     {
         $settings = $settingsRepository->find(1);
+        $pages = $pageRepository->findAll();
+        $properties = $propertyRepository->findAll();
 //        TODO:link to right template, and create the template
-        return $this->render('front/base.html.twig', [
+        return $this->render('front/property/details.html.twig', [
             'controller_name' => 'FrontController',
             'settings' => $settings,
             'property' => $property,
+            'pages' => $pages,
+            'properties' => $properties,
         ]);
     }
 }
