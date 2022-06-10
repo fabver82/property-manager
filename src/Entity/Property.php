@@ -69,6 +69,7 @@ class Property
     #[ORM\OneToOne(targetEntity: Picture::class, cascade: ['persist', 'remove'])]
     private $main_picture;
 
+    public array $priceList=[];
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
@@ -268,6 +269,25 @@ class Property
     {
         $this->main_picture = $main_picture;
 
+        return $this;
+    }
+
+    public function setPriceList($startDate,$endDate):self
+    {
+        $prices = $this->getPrices();
+        $this->priceList = array();
+        $currentDate = new \DateTime($startDate->format('Y-m-d H:i:s'));
+        while($currentDate<$endDate){
+            $this->priceList[$currentDate->format('Y-m-d')] =
+                $this->getMinPrice();
+            foreach($prices as $price){
+                if ($currentDate >= $price->getStartDate() && $currentDate <= $price->getEndDate()) {
+                    $this->priceList[$currentDate->format('Y-m-d')] =$price->getPrice();
+                    break;
+                }
+            }
+            $currentDate->modify('+1 day');
+        }
         return $this;
     }
 }

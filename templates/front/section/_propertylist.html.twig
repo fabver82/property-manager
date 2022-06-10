@@ -10,7 +10,7 @@
         <!-- Row-2 Start -->
         <div class="row">
             {%  for property in properties %}
-            <div class="col-lg-4 col-md-12 col-sm-12 destination wow fadeInDown" data-wow-delay="400ms">
+            <div class="col-lg-6 col-md-12 col-sm-12 destination wow fadeInDown" data-wow-delay="400ms">
                 <a class="card" href="travelling/destinations.html" >
                     <img src="{{ asset('/uploads/' ~ property.mainPicture.filename) }}"  alt="destination-img" style="width:347px">
                     <div class="card-body">
@@ -23,9 +23,14 @@
                             <span class="fas fa-star-half-alt half-checked"></span>
                         </div>
                     </div>
+                    {% if searchDates|length > 0 %}
+                        {% set rates = property.priceList %}
+                        {{ dump(rates) }}
+                    {% endif %}
                 </a>
             </div>
             {% endfor %}
+{#            {{ dump(properties) }}#}
         </div>
         <!-- Row-3 Start -->
 {#        <div class="row row-3">#}

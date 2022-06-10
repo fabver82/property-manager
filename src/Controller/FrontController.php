@@ -5,27 +5,45 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Entity\Property;
 use App\Entity\Settings;
+use App\Form\AvailabilityType;
 use App\Repository\PageRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\SettingsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
+
 
 class FrontController extends AbstractController
 {
     #[Route('/', name: 'app_front')]
-    public function index(SettingsRepository $settingsRepository, PageRepository $pageRepository, PropertyRepository $propertyRepository): Response
+    public function index(SettingsRepository $settingsRepository, PageRepository $pageRepository, PropertyRepository $propertyRepository, Request $request): Response
     {
         //TODO : get only the title of all pages, we dont need all datas
         $pages = $pageRepository->findAll();
         $properties = $propertyRepository->findAll();
         $settings = $settingsRepository->find(1);
-        return $this->render('front/base.html.twig', [
+        $form=$this->createForm(AvailabilityType::class);
+        $searchDates=[];
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchDates['start']= $form->get('start_date')->getData();
+            $searchDates['end'] = $form->get('end_date')->getData();
+            foreach ($properties as $property){
+                $property->setPriceList($searchDates['start'],$searchDates['end']);
+            }
+        }
+        dump($properties);
+
+        return $this->renderForm('front/base.html.twig', [
             'controller_name' => 'FrontController',
             'settings'=>$settings,
             'pages'=>$pages,
             'properties' => $properties,
+            'availability_form' => $form,
+            'searchDates' => $searchDates,
         ]);
     }
     #[Route('/page/{title}', name: 'front_pages_show')]

@@ -96,6 +96,7 @@ class PropertyController extends AbstractController
             'property' => $property,
         ]);
     }
+//    TODO: put this into a validator
     private function checkPriceExist($price,$property): Bool
     {
         foreach($property->getPrices() as $property_price){
