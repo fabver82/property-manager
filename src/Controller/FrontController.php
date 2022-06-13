@@ -29,8 +29,6 @@ class FrontController extends AbstractController
         $searchDates=[];
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            dump($form);
             $searchDates['start']= $form->get('start_date')->getData();
             $searchDates['end'] = $form->get('end_date')->getData();
             foreach ($properties as $property){
@@ -69,7 +67,6 @@ class FrontController extends AbstractController
         $settings = $settingsRepository->find(1);
         $pages = $pageRepository->findAll();
         $properties = $propertyRepository->findAll();
-//        TODO:link to right template, and create the template
         return $this->render('front/property/details.html.twig', [
             'controller_name' => 'FrontController',
             'settings' => $settings,

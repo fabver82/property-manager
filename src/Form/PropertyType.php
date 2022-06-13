@@ -51,6 +51,13 @@ class PropertyType extends AbstractType
                     'Shared' => 'Shared',
                 ]
             ])
+            ->add('status',ChoiceType::class,[
+                'choices' => [
+                    'Open' => 'Open',
+                    'Close' => 'Close',
+                    'Snooze' => 'Snooze',
+                ]
+            ])
             ;
     }
 

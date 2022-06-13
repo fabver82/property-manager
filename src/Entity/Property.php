@@ -70,6 +70,9 @@ class Property
     private $main_picture;
 
     public array $priceList=[];
+
+    #[ORM\Column(type: 'string', length: 50)]
+    private $status;
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
@@ -288,6 +291,18 @@ class Property
             }
             $currentDate->modify('+1 day');
         }
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
         return $this;
     }
 }

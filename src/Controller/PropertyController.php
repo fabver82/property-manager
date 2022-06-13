@@ -56,7 +56,7 @@ class PropertyController extends AbstractController
 
             $propertyRepository->add($property, true);
 
-            return $this->redirectToRoute('app_property_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_property_show', ['id'=>$property->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/property/new.html.twig', [
@@ -148,7 +148,7 @@ class PropertyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $propertyRepository->add($property, true);
 
-            return $this->redirectToRoute('app_property_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_property_show', ['id'=>$property->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/property/edit.html.twig', [
