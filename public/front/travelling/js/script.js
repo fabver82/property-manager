@@ -108,14 +108,18 @@ if ($("#sidemenu_toggle").length) {
        Date Picker
   ====================================== */
 $(document).ready(function() {
-  $("#availability_start_date").datepicker();
+  $("#availability_start_date").datepicker({
+      format: 'yyyy-mm-dd'
+  });
   $('.fa-calendar').click(function() {
     $("#availability_start_date").focus();
   });
 });
 
 $(document).ready(function() {
-  $("#availability_end_date").datepicker();
+  $("#availability_end_date").datepicker({
+      format: 'yyyy-mm-dd'
+  });
   $('.fa-calendar').click(function() {
     $("#availability_end_date").focus();
   });

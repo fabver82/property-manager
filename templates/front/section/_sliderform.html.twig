@@ -14,12 +14,15 @@
 {#                {{ form_errors(availability_form) }}#}
 {#                <button class="btn" type="submit" >{{ button_label|default('Save') }}</button>#}
 {#                {{ form_end(availability_form) }}#}
-                <form class="row contact-form rounded-pill link" method="post" name="availability">
+{#                <form class="row contact-form rounded-pill link" method="post" name="availability">#}
+                {{ form_start(availability_form,{'attr':{'class':'row contact-form rounded-pill link'}}) }}
                     <div class="col-12 col-lg-9 d-inline-block d-lg-flex align-items-center">
+                        {{ form_errors(availability_form) }}
                         <div class="form-group">
                             <label for="availability_start_date"> <span class="fas fa-calendar-plus " aria-hidden="true"></span></label>
 {#                            <input type="text" name='datepicker' class="form-control"  value="" id="datepicker"#}
 {#                                   required="" placeholder="Check In" >#}
+                            {{ form_errors(availability_form.start_date) }}
                             {{ form_widget(availability_form.start_date,{'attr':{'placeholder':'Check In'}}) }}
                         </div>
                         <div class="form-group">
@@ -52,11 +55,11 @@
 {#                            <input type="text" name="Location" placeholder="Location" id="location" required="" class="form-control">#}
 {#                        </div>#}
                     </div>
-                        <div class="col-12 col-lg-3 button-center">
-                            <a href="javascript:void(0);" class="btn button btn-rounded green-btn btn-hvr-grey">{{ button_label|default('Find') }}
-                            </a>
+                        <div class="col-12 col-lg-3 ">
+                            <button class="btn button btn-rounded green-btn btn-hvr-grey" type="submit">{{ button_label|default('Find') }}
+                            </button>
                         </div>
-                </form>
+                {{ form_end(availability_form) }}
 
             </div>
         </div>
