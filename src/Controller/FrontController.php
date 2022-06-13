@@ -28,9 +28,9 @@ class FrontController extends AbstractController
         $form=$this->createForm(AvailabilityType::class);
         $searchDates=[];
         $form->handleRequest($request);
-        dump($form);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->get('start_date')->getData());
+
+            dump($form);
             $searchDates['start']= $form->get('start_date')->getData();
             $searchDates['end'] = $form->get('end_date')->getData();
             foreach ($properties as $property){

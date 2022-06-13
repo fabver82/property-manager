@@ -11,7 +11,7 @@
         <div class="row">
             {%  for property in properties %}
             <div class="col-lg-4 col-md-12 col-sm-12 destination wow fadeInDown" data-wow-delay="400ms">
-                <a class="card" href="travelling/destinations.html" >
+                <a class="card" href="{{ path('front_property_show',{'id':property.id}) }}" >
                     <img src="{{ asset('/uploads/' ~ property.mainPicture.filename) }}"  alt="destination-img" style="width:347px">
                     <div class="card-body">
                         <h5 class="card-title">{{ property.title }} <span></span></h5>

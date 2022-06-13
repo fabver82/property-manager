@@ -4,10 +4,10 @@ namespace App\Form;
 
 use App\Entity\Booking;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 //, [
 //    'widget' => 'single_text',
 //    'html5' => false,
@@ -25,13 +25,22 @@ class AvailabilityType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'years' => [date('Y'),date('Y')+1],
             ])
-            ->add('end_date',DateTimeType::class,[
+            ->add('end_date',DateType::class,[
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'MM/dd/yyyy',
                 'attr' => ['class' => 'form-control'],
                 'years' => [date('Y'),date('Y')+1],
             ])
+//            TODO: get max guest from settings and populate thecdropdown accordingly( to be added)
+            ->add('nb_guest',ChoiceType::class,[
+                'choices' => [
+                    '1 Person' => 1,
+                    '2 Persons' => 2,
+                    '3 Persons' => 3,
+                ],
+                'attr' => ['class' => 'form-control'],
+                ])
         ;
     }
 
