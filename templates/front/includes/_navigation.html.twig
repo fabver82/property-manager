@@ -12,12 +12,23 @@
                     <a class="nav-link " href="{{ path('app_front') }}">Home</a>
                 </li>
 {#                TODO: make it a dropdown#}
-                {% for property in properties %}
+
                     <li class="nav-item">
+                        <div class="dropdown">
+                            <a type="button" class="nav-link dropdown-toggle mr-0" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Properties
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background: transparent;border:transparent">
+                                {% for property in properties %}
+{#                                    TODO:fix white background on hover#}
+                                <a class="nav-link dropdown-item" href="{{  path('front_property_show',{ 'id': property.id }) }}">{{ property.title }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
 {#                        TODO: create slug instead of using id in the link#}
-                        <a class="nav-link" href="{{  path('front_property_show',{ 'id': property.id }) }}">{{ property.title }}</a>
+{#                        <a class="nav-link" href="{{  path('front_property_show',{ 'id': property.id }) }}">{{ property.title }}</a>#}
                     </li>
-                {% endfor %}
+
                 {% for page in pages %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{  path('front_pages_show',{ 'title': page.title}) }}">{{ page.title }}</a>
