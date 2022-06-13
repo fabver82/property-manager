@@ -7,18 +7,26 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-
+//, [
+//    'widget' => 'single_text',
+//    'html5' => false,
+//    'attr' => ['class' => 'js-datepicker'],
+//]
 class AvailabilityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('start_date',DateType::class,[
-                'widget' => 'choice',
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'form-control'],
                 'years' => [date('Y'),date('Y')+1],
             ])
             ->add('end_date',DateType::class,[
-                'widget' => 'choice',
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'form-control'],
                 'years' => [date('Y'),date('Y')+1],
             ])
         ;

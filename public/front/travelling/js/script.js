@@ -108,16 +108,16 @@ if ($("#sidemenu_toggle").length) {
        Date Picker
   ====================================== */
 $(document).ready(function() {
-  $("#datepicker").datepicker();
+  $("#availability_start_date").datepicker();
   $('.fa-calendar').click(function() {
-    $("#datepicker").focus();
+    $("#availability_start_date").focus();
   });
 });
 
 $(document).ready(function() {
-  $("#datepickr").datepicker();
+  $("#availability_end_date").datepicker();
   $('.fa-calendar').click(function() {
-    $("#datepickr").focus();
+    $("#availability_end_date").focus();
   });
 });
 
