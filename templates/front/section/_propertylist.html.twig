@@ -32,7 +32,7 @@
                             </div>
                         {%  else %}
                             <div class="card-text">
-                                <span>From {{ property.minPrice|format_currency(settings.currency, {fraction_digit: 0}) / night }}</span>
+                                <span>From {{ property.minPrice|format_currency(settings.currency, {fraction_digit: 0})}} / night </span>
                             </div>
                         {% endif %}
 

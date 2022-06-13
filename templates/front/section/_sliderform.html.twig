@@ -39,7 +39,7 @@
 {#                        </a>#}
 {#                    </div>#}
 {#                </form>#}
-                {{ form_start(availability_form) }}
+                {{ form_start(availability_form,{'attr':{'class':'row contact-form rounded-pill link'}}) }}
                 {{ form_widget(availability_form) }}
                 {{ form_errors(availability_form) }}
                 <button class="btn" type="submit" >{{ button_label|default('Save') }}</button>
