@@ -10,23 +10,33 @@
         <!-- Row-2 Start -->
         <div class="row">
             {%  for property in properties %}
-            <div class="col-lg-6 col-md-12 col-sm-12 destination wow fadeInDown" data-wow-delay="400ms">
+            <div class="col-lg-4 col-md-12 col-sm-12 destination wow fadeInDown" data-wow-delay="400ms">
                 <a class="card" href="travelling/destinations.html" >
                     <img src="{{ asset('/uploads/' ~ property.mainPicture.filename) }}"  alt="destination-img" style="width:347px">
                     <div class="card-body">
-                        <h5 class="card-title">{{ property.title }} <span>{{ property.minPrice|format_currency(settings.currency, {fraction_digit: 0})  }}</span></h5>
-                        <div class="card-text">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fas fa-star-half-alt half-checked"></span>
-                        </div>
+                        <h5 class="card-title">{{ property.title }} <span></span></h5>
+
+{#                            <span class="fa fa-star checked"></span>#}
+{#                            <span class="fa fa-star checked"></span>#}
+{#                            <span class="fa fa-star checked"></span>#}
+{#                            <span class="fa fa-star checked"></span>#}
+{#                            <span class="fas fa-star-half-alt half-checked"></span>#}
+                        {% if searchDates|length > 0 %}
+                            {% set rates = property.priceList %}
+                            {% set sum = 0 %}
+                            {%  for rate in rates %}
+                                {%  set sum = sum + rate %}
+                            {% endfor %}
+                            <div class="card-text">
+                                {{ rates|length }} nights - {{ sum|format_currency(settings.currency, {fraction_digit: 0}) }}
+                            </div>
+                        {%  else %}
+                            <div class="card-text">
+                                <span>From {{ property.minPrice|format_currency(settings.currency, {fraction_digit: 0}) / night }}</span>
+                            </div>
+                        {% endif %}
+
                     </div>
-                    {% if searchDates|length > 0 %}
-                        {% set rates = property.priceList %}
-                        {{ dump(rates) }}
-                    {% endif %}
                 </a>
             </div>
             {% endfor %}

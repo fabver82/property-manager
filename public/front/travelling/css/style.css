@@ -816,12 +816,12 @@ a{
 .destination-section .card .card-title{
   color:#202020;
 }
-.destination-section .card .card-title span{
+.destination-section .card .card-text{
   color: #12b975;
-  font-size: 30px;
-  right: 30px;
-  bottom:35px;
-  position: absolute;
+  /*font-size: 30px;*/
+  /*right: 30px;*/
+  /*bottom:35px;*/
+  /*position: absolute;*/
 }
 .destination-section .card .card-text .checked, .half-checked{
   color: #ffc600;
